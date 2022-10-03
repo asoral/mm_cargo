@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-08-29 16:54:55.644076",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "custom_borders",
+  "location",
+  "agent_inhouse",
+  "agent_name",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "custom_borders",
+   "fieldtype": "Heading",
+   "label": "Custom Borders"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Location",
+   "options": "Location"
+  },
+  {
+   "fieldname": "agent_inhouse",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Agent / Inhouse",
+   "options": "\nAgent\nIn-House"
+  },
+  {
+   "fieldname": "agent_name",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Agent Name",
+   "options": "Sales Partner"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-09-14 12:44:45.957823",
+ "modified_by": "Administrator",
+ "module": "Mm Cargo",
+ "name": "Custom Borders",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

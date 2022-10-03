@@ -1,0 +1,510 @@
+{
+ "actions": [],
+ "autoname": "series",
+ "creation": "2022-08-29 17:50:30.663159",
+ "doctype": "DocType",
+ "document_type": "System",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "series",
+  "posting_date",
+  "company",
+  "heading_pickup_from",
+  "pickup_from_type",
+  "pickup_company",
+  "pickup_customer",
+  "pickup_supplier",
+  "pickup",
+  "pickup_address_name",
+  "pickup_address",
+  "pickup_contact_person",
+  "pickup_contact_name",
+  "pickup_contact_email",
+  "pickup_contact",
+  "column_break_2",
+  "heading_delivery_to",
+  "delivery_to_type",
+  "delivery_company",
+  "delivery_customer",
+  "sales_order",
+  "delivery_supplier",
+  "delivery_to",
+  "delivery_address_name",
+  "delivery_address",
+  "delivery_contact_name",
+  "delivery_contact_email",
+  "delivery_contact",
+  "tracking_status_section",
+  "delivery_milestone",
+  "customs_status",
+  "booking_items",
+  "parcels_section",
+  "parcel_template",
+  "add_template",
+  "shipment_details_section",
+  "value_of_goods",
+  "verification_code",
+  "pickup_date",
+  "column_break_36",
+  "shipment_type",
+  "pickup_type",
+  "incoterm",
+  "description_of_content",
+  "section_break_40",
+  "third_party_tracking_section",
+  "service_provider",
+  "shipment_id",
+  "shipment_amount",
+  "status",
+  "tracking_url",
+  "column_break_55",
+  "carrier",
+  "carrier_service",
+  "tracking_status",
+  "tracking_status_info",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "WB-############"
+  },
+  {
+   "fieldname": "heading_pickup_from",
+   "fieldtype": "Heading",
+   "label": "Pickup from"
+  },
+  {
+   "default": "Company",
+   "fieldname": "pickup_from_type",
+   "fieldtype": "Select",
+   "label": "Pickup from",
+   "options": "Company\nCustomer\nSupplier"
+  },
+  {
+   "depends_on": "eval:doc.pickup_from_type == 'Company'",
+   "fieldname": "pickup_company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "depends_on": "eval:doc.pickup_from_type == 'Customer'",
+   "fieldname": "pickup_customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "depends_on": "eval:doc.pickup_from_type == 'Supplier'",
+   "fieldname": "pickup_supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "pickup",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Pickup From",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.pickup_customer || doc.pickup_supplier || doc.pickup_from_type == \"Company\"",
+   "fieldname": "pickup_address_name",
+   "fieldtype": "Link",
+   "label": "Address",
+   "options": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pickup_address",
+   "fieldtype": "Small Text",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.pickup_from_type === 'Company'",
+   "fieldname": "pickup_contact_person",
+   "fieldtype": "Link",
+   "label": "Pickup Contact Person",
+   "mandatory_depends_on": "eval:doc.pickup_from_type === 'Company'",
+   "options": "User"
+  },
+  {
+   "depends_on": "eval: doc.pickup_customer || doc.pickup_supplier || doc.pickup_from_type !== \"Company\"",
+   "fieldname": "pickup_contact_name",
+   "fieldtype": "Link",
+   "label": "Contact",
+   "mandatory_depends_on": "eval: doc.pickup_from_type !== 'Company'",
+   "options": "Contact"
+  },
+  {
+   "fieldname": "pickup_contact_email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Contact Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "pickup_contact",
+   "fieldtype": "Small Text",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "heading_delivery_to",
+   "fieldtype": "Heading",
+   "label": "Delivery to"
+  },
+  {
+   "default": "Customer",
+   "fieldname": "delivery_to_type",
+   "fieldtype": "Select",
+   "label": "Delivery to",
+   "options": "Company\nCustomer\nSupplier"
+  },
+  {
+   "depends_on": "eval:doc.delivery_to_type == 'Company'",
+   "fieldname": "delivery_company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "depends_on": "eval:doc.delivery_to_type == 'Customer'",
+   "fieldname": "delivery_customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "depends_on": "eval:doc.delivery_to_type == 'Supplier'",
+   "fieldname": "delivery_supplier",
+   "fieldtype": "Link",
+   "label": "Supplier",
+   "options": "Supplier"
+  },
+  {
+   "fieldname": "delivery_to",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Delivery To",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.delivery_customer || doc.delivery_supplier || doc.delivery_to_type == \"Company\"",
+   "fieldname": "delivery_address_name",
+   "fieldtype": "Link",
+   "label": "Address",
+   "options": "Address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_address",
+   "fieldtype": "Small Text",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval: doc.delivery_customer || doc.delivery_supplier || doc.delivery_to_type == \"Company\"",
+   "fieldname": "delivery_contact_name",
+   "fieldtype": "Link",
+   "label": "Contact",
+   "mandatory_depends_on": "eval: doc.delivery_from_type !== 'Company'",
+   "options": "Contact"
+  },
+  {
+   "fieldname": "delivery_contact_email",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Contact Email",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.delivery_contact_name",
+   "fieldname": "delivery_contact",
+   "fieldtype": "Small Text",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tracking_status_section",
+   "fieldtype": "Section Break",
+   "label": "Tracking Status"
+  },
+  {
+   "fieldname": "delivery_milestone",
+   "fieldtype": "Select",
+   "label": "Delivery Milestone"
+  },
+  {
+   "depends_on": "eval:doc.delivery_milestone==\"Customs Border\"",
+   "fieldname": "customs_status",
+   "fieldtype": "Select",
+   "label": "Customs Status",
+   "options": "Customs Inward\nCustoms Cleared\nCustoms Released"
+  },
+  {
+   "fieldname": "parcels_section",
+   "fieldtype": "Section Break",
+   "label": "Parcels"
+  },
+  {
+   "fieldname": "booking_items",
+   "fieldtype": "Table",
+   "label": "Booking Items",
+   "options": "Box Details"
+  },
+  {
+   "fieldname": "parcel_template",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Parcel Template",
+   "options": "Shipment Parcel Template"
+  },
+  {
+   "depends_on": "eval:doc.docstatus !== 1\n",
+   "fieldname": "add_template",
+   "fieldtype": "Button",
+   "hidden": 1,
+   "label": "Add Template"
+  },
+  {
+   "fieldname": "shipment_details_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Shipment details"
+  },
+  {
+   "fieldname": "value_of_goods",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Value of Goods",
+   "precision": "2"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "pickup_date",
+   "fieldtype": "Date",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Pickup Date"
+  },
+  {
+   "fieldname": "column_break_36",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Goods",
+   "fieldname": "shipment_type",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Shipment Type",
+   "options": "Goods\nDocuments"
+  },
+  {
+   "default": "Pickup",
+   "fieldname": "pickup_type",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Pickup Type",
+   "options": "Pickup\nSelf delivery"
+  },
+  {
+   "fieldname": "incoterm",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Incoterm",
+   "options": "EXW (Ex Works)\nFCA (Free Carrier)\nCPT (Carriage Paid To)\nCIP (Carriage and Insurance Paid to)\nDPU (Delivered At Place Unloaded)\nDAP (Delivered At Place)\nDDP (Delivered Duty Paid)"
+  },
+  {
+   "fieldname": "description_of_content",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Description of Content"
+  },
+  {
+   "fieldname": "section_break_40",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "third_party_tracking_section",
+   "fieldtype": "Section Break",
+   "hidden": 1,
+   "label": "Third Party Tracking"
+  },
+  {
+   "fieldname": "service_provider",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Service Provider",
+   "no_copy": 1,
+   "print_hide": 1
+  },
+  {
+   "fieldname": "shipment_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Shipment ID(Third Party)",
+   "no_copy": 1,
+   "print_hide": 1
+  },
+  {
+   "fieldname": "shipment_amount",
+   "fieldtype": "Currency",
+   "hidden": 1,
+   "label": "Shipment Amount",
+   "no_copy": 1,
+   "precision": "2",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nSubmitted\nBooked\nCancelled\nCompleted",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "tracking_url",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "label": "Tracking URL"
+  },
+  {
+   "fieldname": "column_break_55",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "carrier",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Carrier",
+   "no_copy": 1,
+   "print_hide": 1
+  },
+  {
+   "fieldname": "carrier_service",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Carrier Service",
+   "no_copy": 1,
+   "print_hide": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "tracking_status",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Tracking Status",
+   "no_copy": 1,
+   "options": "\nIn Progress\nDelivered\nReturned\nLost",
+   "print_hide": 1
+  },
+  {
+   "fieldname": "tracking_status_info",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Tracking Status Info",
+   "no_copy": 1,
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Waybill",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Waybill",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "Sales Order",
+   "options": "Sales Order",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Date"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "verification_code",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Verification Code"
+  }
+ ],
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-10-03 21:43:06.772838",
+ "modified_by": "Administrator",
+ "module": "Mm Cargo",
+ "name": "Waybill",
+ "name_case": "Title Case",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Stock Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

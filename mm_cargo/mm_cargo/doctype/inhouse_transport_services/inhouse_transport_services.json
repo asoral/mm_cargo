@@ -1,0 +1,47 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-08-29 16:39:48.220847",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "origin_point",
+  "destination_point",
+  "vehicle_type"
+ ],
+ "fields": [
+  {
+   "fieldname": "origin_point",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Origin Point",
+   "options": "Location"
+  },
+  {
+   "fieldname": "destination_point",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Destination Point",
+   "options": "Location"
+  },
+  {
+   "fieldname": "vehicle_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Vehicle Type",
+   "options": "Vehicle Type"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-09-14 12:44:48.301197",
+ "modified_by": "Administrator",
+ "module": "Mm Cargo",
+ "name": "Inhouse Transport Services",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

@@ -1,0 +1,71 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-08-29 16:56:29.026048",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "length",
+  "width",
+  "height",
+  "weight",
+  "numbers",
+  "vw",
+  "aw"
+ ],
+ "fields": [
+  {
+   "fieldname": "length",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Length"
+  },
+  {
+   "fieldname": "width",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Width"
+  },
+  {
+   "fieldname": "height",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Height"
+  },
+  {
+   "fieldname": "weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weight"
+  },
+  {
+   "fieldname": "numbers",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Numbers"
+  },
+  {
+   "fetch_from": "calculation.value",
+   "fieldname": "vw",
+   "fieldtype": "Float",
+   "label": "Volumetric Weight"
+  },
+  {
+   "fieldname": "aw",
+   "fieldtype": "Float",
+   "label": "Actual Weight"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-09-14 12:44:02.997689",
+ "modified_by": "Administrator",
+ "module": "Mm Cargo",
+ "name": "Booking Details Items",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

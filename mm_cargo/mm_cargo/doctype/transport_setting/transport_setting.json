@@ -1,0 +1,76 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2022-09-01 16:28:45.199544",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "mmcs",
+  "mm",
+  "cc",
+  "lt",
+  "pc",
+  "sp"
+ ],
+ "fields": [
+  {
+   "fieldname": "mmcs",
+   "fieldtype": "Link",
+   "label": "Default MMCS Transport Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "mm",
+   "fieldtype": "Link",
+   "label": "Default Multi Model Transport Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "cc",
+   "fieldtype": "Link",
+   "label": "Default Custom Clearing  Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "lt",
+   "fieldtype": "Link",
+   "label": "Default Local Transport Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "pc",
+   "fieldtype": "Link",
+   "label": "Default Permit Charges  Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "sp",
+   "fieldtype": "Link",
+   "label": "Default Special  Packaging  Item",
+   "options": "Item"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2022-09-01 16:28:45.199544",
+ "modified_by": "Administrator",
+ "module": "Mm Cargo",
+ "name": "Transport Setting",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

@@ -1,0 +1,251 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2022-08-29 17:24:45.447895",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "party",
+  "party_name",
+  "imp_ex",
+  "column_break_2",
+  "booking_date",
+  "shipment_type",
+  "incoterm",
+  "section_break_2",
+  "origin_point",
+  "port_of_entry",
+  "port_of_exit",
+  "destination",
+  "mmcs_transport",
+  "multimodal_transport",
+  "multimodal_details",
+  "custom_clearing_required",
+  "custom_region",
+  "weight_calculation_section",
+  "booking_items",
+  "section_break_15",
+  "need_pickup",
+  "pickup_address",
+  "kms",
+  "column_break_10",
+  "special_packaging",
+  "packaging_charges",
+  "permits_required",
+  "permits_details",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "default": ".FY.-#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": ".FY.-#####"
+  },
+  {
+   "fieldname": "party",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "label": "Party",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "party_name",
+   "fieldtype": "Dynamic Link",
+   "label": "Party Name",
+   "options": "party"
+  },
+  {
+   "fieldname": "imp_ex",
+   "fieldtype": "Select",
+   "label": "Import / Export",
+   "options": "\nImport\nExport\nDomestic"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break",
+   "width": "50"
+  },
+  {
+   "fieldname": "booking_date",
+   "fieldtype": "Date",
+   "label": "Booking Date"
+  },
+  {
+   "fieldname": "shipment_type",
+   "fieldtype": "Select",
+   "label": "Shipment Type",
+   "options": "\nConsolidated\nDedicated"
+  },
+  {
+   "fieldname": "incoterm",
+   "fieldtype": "Select",
+   "label": "Incoterm",
+   "options": "EXW (Ex Works)\nFCA (Free Carrier)\nCPT (Carriage Paid To)\nCIP (Carriage and Insurance Paid to)\nDPU (Delivered At Place Unloaded)\nDAP (Delivered At Place)\nDDP (Delivered Duty Paid)"
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "origin_point",
+   "fieldtype": "Link",
+   "label": "Origin Point",
+   "options": "Location"
+  },
+  {
+   "depends_on": "eval:doc.imp_ex==\"Import\"",
+   "fieldname": "port_of_entry",
+   "fieldtype": "Link",
+   "label": "Port of Entry",
+   "options": "Location"
+  },
+  {
+   "depends_on": "eval:doc.imp_ex==\"Export\"",
+   "fieldname": "port_of_exit",
+   "fieldtype": "Link",
+   "label": "Port of Exit",
+   "options": "Location"
+  },
+  {
+   "fieldname": "destination",
+   "fieldtype": "Link",
+   "label": "Destination",
+   "options": "Location"
+  },
+  {
+   "fieldname": "mmcs_transport",
+   "fieldtype": "Table",
+   "label": "MMCS Transport",
+   "options": "Inhouse Transport Services"
+  },
+  {
+   "default": "0",
+   "fieldname": "multimodal_transport",
+   "fieldtype": "Check",
+   "label": "Multimodal Transport"
+  },
+  {
+   "depends_on": "eval:doc.multimodal_transport==1",
+   "fieldname": "multimodal_details",
+   "fieldtype": "Table",
+   "label": "Multimodal Details",
+   "options": "Multimodal Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "custom_clearing_required",
+   "fieldtype": "Check",
+   "label": "Custom Clearing Required"
+  },
+  {
+   "depends_on": "eval:doc.custom_clearing_required==1",
+   "fieldname": "custom_region",
+   "fieldtype": "Table",
+   "label": "Custom Region",
+   "options": "Custom Borders"
+  },
+  {
+   "fieldname": "weight_calculation_section",
+   "fieldtype": "Section Break",
+   "label": "Weight Calculation"
+  },
+  {
+   "fieldname": "booking_items",
+   "fieldtype": "Table",
+   "label": "Booking Items",
+   "options": "Booking Details Items"
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "need_pickup",
+   "fieldtype": "Check",
+   "label": "Need PickUp"
+  },
+  {
+   "depends_on": "eval:doc.need_pickup==1",
+   "fieldname": "pickup_address",
+   "fieldtype": "Data",
+   "label": "Pick Up Address"
+  },
+  {
+   "depends_on": "eval:doc.need_pickup==1",
+   "fieldname": "kms",
+   "fieldtype": "Data",
+   "label": "Kms"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break",
+   "width": "50"
+  },
+  {
+   "default": "0",
+   "fieldname": "special_packaging",
+   "fieldtype": "Check",
+   "label": "Special Packaging"
+  },
+  {
+   "depends_on": "eval:doc.special_packaging==1",
+   "fieldname": "packaging_charges",
+   "fieldtype": "Data",
+   "label": "Packaging Charges"
+  },
+  {
+   "default": "0",
+   "fieldname": "permits_required",
+   "fieldtype": "Check",
+   "label": "Permits Required"
+  },
+  {
+   "depends_on": "eval:doc.permits_required==1",
+   "fieldname": "permits_details",
+   "fieldtype": "Table",
+   "label": "Permits Details",
+   "options": "Permits Required"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Booking Details",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2022-09-01 15:29:38.079424",
+ "modified_by": "Administrator",
+ "module": "Mm Cargo",
+ "name": "Booking Details",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
