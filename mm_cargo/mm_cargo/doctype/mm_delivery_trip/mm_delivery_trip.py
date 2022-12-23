@@ -10,6 +10,7 @@ from frappe.contacts.doctype.address.address import get_address_display
 from frappe.model.document import Document
 from frappe.model.mapper import get_mapped_doc
 from frappe.utils import cint, get_datetime, get_link_to_form
+from datetime import datetime
 
 
 class MMDeliveryTrip(Document):
@@ -54,6 +55,104 @@ class MMDeliveryTrip(Document):
 				status = "In Transit"
 
 		self.db_set("status", status)
+	
+	def before_save(self):
+		lst = []
+		w_list=[]
+		for i in self.delivery_stops:
+			# w_list.append(i.waybill)
+			# if i.waybill in w_list:
+			# 	frappe.throw("Waybill is repeated")
+			mil = frappe.get_doc("Waybill",{"name":i.waybill})
+			for l in self.milestone_list:
+				lst.append(l.milestone)
+			for j in mil.milestone_list:
+
+				if j.milestone not in lst :
+					self.append("milestone_list",{
+					"milestone":j.milestone,
+					# "timestamp":datetime.now()
+				})
+	
+	def before_update_after_submit(self):
+		for r in self.milestone_list:
+			if r.delivered == 1:
+				if r.timestamp:
+					pass
+				else:
+					r.timestamp=datetime.now()
+				for k in self.delivery_stops:
+
+					wb_ts = frappe.get_doc("Waybill",{"name":k.waybill})
+					for j in wb_ts.milestone_list:
+
+						if j.milestone == r.milestone and r.delivered == 1:
+							frappe.db.set_value("Milestone List",{"parent":wb_ts.name,"milestone":j.milestone},{
+									"delivered":1,
+									"timestamp":r.timestamp
+							})
+						else:
+							pass
+							
+			else:
+				r.timestamp = ""
+				
+		
+
+
+	@frappe.whitelist()
+	def wb_list(self):
+		w_list=[]
+		for i in self.delivery_stops:
+			w_list.append(i.waybill)
+		w_list.pop()
+		if i.waybill in w_list:
+			frappe.msgprint("Waybill is repeated")
+			i.waybill=""
+		print("&&&&&&&&&&&&&&&&&&&&&&&&&7777",w_list)
+		# return w_list
+					# print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",k.milestone)
+					
+				# self.append("milestone_list",{
+				# 		"milestone":j.milestone,
+				# 		"timestamp":j.timestamp
+				# 	})
+
+					# if k.milestone != j.milestone:
+
+						
+				# print("^^^^^^^^^^^^^^^^^^^^^^^666666",j.milestone)
+			# 	if j.name in mil_list:
+			# 		mil_list.append(j.milestone)
+			# print("!!!!!!!!!!!!!!!!!!!!!!",mil_list)
+				# for k in self.milestone_list:
+				# 	if k.milestone != j.milestone:
+				# 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1",j.milestone)
+				# mil_list.append(j.milestone)
+				# self.append("milestone_list",{
+				# 		"milestone":j.milestone,
+				# 		"timestamp":j.timestamp
+				# 	})
+
+				# print("$$$$$$$$$$$$$$$$$$$$$$$",j.milestone)
+		# # mil = frappe.get_all("Waybill",["name"])
+		# mil_list=[]
+		# # for k in mil:
+		# # 	mil_list.append(k.name)
+
+		# for i in self.delivery_stops:
+		# 	# if i.waybill != k.name:
+		# 	# 	frappe.msgprint("Waybill is repeated in delivery stop")
+		# 	mil_list.append(i.name)
+		# 	m_stone = frappe.get_doc("Waybill",{"name":i.waybill})
+		# 	for j in m_stone.milestone_list:
+		# 		print("")
+		# 		if i.waybill != j.milestone:
+					# self.append("milestone_list",{
+					# 	"milestone":j.milestone,
+					# 	"timestamp":j.timestamp
+					# })
+
   
   
 	# def update_waybill(self):

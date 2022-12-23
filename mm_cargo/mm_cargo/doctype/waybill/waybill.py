@@ -47,8 +47,8 @@ class Waybill(Document):
 
 
 		# message = frappe.render_template(email_template.response, args)
+	
 		new_comm = frappe.new_doc("Communication")
-		
 		new_comm.subject = "Waybill OTP"
 		new_comm.communication_medium = "Email"
 		new_comm.sender = outgoing
@@ -64,8 +64,90 @@ class Waybill(Document):
 		new_comm.reference_name = self.name
 		new_comm.reference_owner = self.name
 		new_comm.save(ignore_permissions=True)	
+		
+
+	@frappe.whitelist()
+	def address(self):
+		doc = frappe.get_all("Dynamic Link",{"link_doctype":"Customer","link_name":self.pickup_customer,"parenttype":"Address"},["parent"])
+		c_doc = frappe.get_all("Dynamic Link",{"link_doctype":"Customer","link_name":self.pickup_customer,"parenttype":"Contact"},["parent"])
+		print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",c_doc)
+		list_adr=[]
+		list_con=[]
+		for c_ads in doc:
+			list_adr.append(c_ads.parent)
+		for c_con in c_doc:
+			list_con.append(c_con.parent)
+		return list_adr,list_con
+
+	@frappe.whitelist()
+	def d_address(self):
+		doc = frappe.get_all("Dynamic Link",{"link_doctype":"Customer","link_name":self.delivery_customer,"parenttype":"Address"},["parent"])
+		c_doc = frappe.get_all("Dynamic Link",{"link_doctype":"Customer","link_name":self.pickup_customer,"parenttype":"Contact"},["parent"])
+		list_adr1=[]
+		list_con1=[]
+		for c_ads in doc:
+			list_adr1.append(c_ads.parent)
+		for c_con in c_doc:
+			list_con1.append(c_con.parent)
+		return list_adr1,list_con1
+
 	
- 
+	@frappe.whitelist()
+	def company_n(self):
+		doc = frappe.get_all("Dynamic Link",{"link_doctype":"Company","link_name":self.pickup_company,"parenttype":"Address"},["parent"])
+		c_doc = frappe.get_all("Dynamic Link",{"link_doctype":"Company","link_name":self.pickup_company,"parenttype":"Contact"},["parent"])
+		list_adr2=[]
+		list_con2=[]
+		for c_ads in doc:
+			list_adr2.append(c_ads.parent)
+		for c_con in c_doc:
+			list_con2.append(c_con.parent)
+		return list_adr2,list_con2
+	
+	@frappe.whitelist()
+	def company_n1(self):
+		doc = frappe.get_all("Dynamic Link",{"link_doctype":"Company","link_name":self.delivery_company,"parenttype":"Address"},["parent"])
+		c_doc = frappe.get_all("Dynamic Link",{"link_doctype":"Company","link_name":self.delivery_company,"parenttype":"Contact"},["parent"])
+		list_adr3=[]
+		list_con3=[]
+		for c_ads in doc:
+			list_adr3.append(c_ads.parent)
+		for c_con in c_doc:
+			list_con3.append(c_con.parent)
+		return list_adr3,list_con3
+
+	@frappe.whitelist()
+	def supplier_n(self):
+		doc = frappe.get_all("Dynamic Link",{"link_doctype":"Supplier","link_name":self.pickup_supplier,"parenttype":"Address"},["parent"])
+		c_doc = frappe.get_all("Dynamic Link",{"link_doctype":"Supplier","link_name":self.pickup_supplier,"parenttype":"Contact"},["parent"])
+		list_adr4=[]
+		list_con4=[]
+		for c_ads in doc:
+			list_adr4.append(c_ads.parent)
+		for c_con in c_doc:
+			list_con4.append(c_con.parent)
+		return list_adr4,list_con4
+	
+	@frappe.whitelist()
+	def supplier_d(self):
+		doc = frappe.get_all("Dynamic Link",{"link_doctype":"Supplier","link_name":self.delivery_supplier,"parenttype":"Address"},["parent"])
+		c_doc = frappe.get_all("Dynamic Link",{"link_doctype":"Supplier","link_name":self.delivery_supplier,"parenttype":"Contact"},["parent"])
+		list_adr5=[]
+		list_con5=[]
+		for c_ads in doc:
+			list_adr5.append(c_ads.parent)
+		for c_con in c_doc:
+			list_con5.append(c_con.parent)
+		return list_adr5,list_con5
+
+	def before_update_after_submit(self):
+		if (self.otp == self.verification_code):
+			frappe.db.set_value("Delivery Stops",{"waybill":self.name,"parenttype":"MM Delivery Trip"},{
+								"delivered":1
+						})
+			# pass
+		else:
+			frappe.throw("Please enter valide OTP")
 
 	def notify(self, args):
 		args = frappe._dict(args)
@@ -95,7 +177,8 @@ class Waybill(Document):
 @frappe.whitelist()
 def make_waybill(source_name, target_doc="Delivery Stops"):
 	def update_stop_details(source_doc, target_doc,source_parent):
-		print("888888888888888888",target_doc.doctype)
+		# print("888888888888888888",target_doc.doctype)
+		print("#########55555555555555")
 		target_doc.customer = source_parent.delivery_customer
 		target_doc.address = source_parent.delivery_address_name
 		if source_parent.sales_order:
@@ -107,7 +190,7 @@ def make_waybill(source_name, target_doc="Delivery Stops"):
 
 		# Append unique Delivery Notes in Delivery Trip
 		waybills.append(source_doc.name)
-
+	print("&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 	waybills = []
 
 	doclist = get_mapped_doc(
@@ -124,4 +207,6 @@ def make_waybill(source_name, target_doc="Delivery Stops"):
 		},
 		target_doc,
 	)
+	print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6",doclist)
 	return doclist
+

@@ -24,6 +24,7 @@
   "employee",
   "delivery_service_stops",
   "delivery_stops",
+  "milestone_list",
   "calculate_arrival_time",
   "optimize_route",
   "section_break_15",
@@ -138,6 +139,7 @@
    "label": "Delivery Stops"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "delivery_stops",
    "fieldtype": "Table",
    "label": "Delivery Stop",
@@ -194,14 +196,22 @@
    "options": "MM Delivery Trip",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "milestone_list",
+   "fieldtype": "Table",
+   "label": "Milestone List",
+   "options": "Milestone List"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2022-09-22 13:18:59.125122",
+ "modified": "2022-12-22 14:32:10.475446",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "MM Delivery Trip",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -237,5 +247,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "title_field": "driver_name"
 }

@@ -15,12 +15,14 @@ class BookingDetails(Document):
 			if self.shipment_type=="Dedicated":
 				price=[]
 				local_rate=[]
-				location.append(self.origin_point)
-				location.append(self.destination)
+				# location.append(self.origin_point)
+				# location.append(self.destination)
 				if self.port_of_exit:
 					location.append(self.port_of_exit)
 				if self.port_of_entry:
 					location.append(self.port_of_entry)
+				doc=frappe.new_doc("Quotation")
+
 				for i in self.mmcs_transport:
 					doc.append("mmcs_transport",{
 						"origin_point":i.origin_point,
@@ -30,11 +32,10 @@ class BookingDetails(Document):
 					location.append(i.origin_point)
 					location.append(i.destination_point)
 					doc1=frappe.get_value("Pricing Matrix",{"source":i.origin_point,"dest":i.destination_point,"vehicle_type":i.vehicle_type},["price"])
-					price.append(doc1)
+					price.append(flt(doc1))
 					if self.need_pickup:
 						local_rate1=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["local_rate"])
 						local_rate.append(local_rate1)
-				doc=frappe.new_doc("Quotation")
 				doc.booking_details=self.name
 				doc.quotation_to=self.party
 				doc.party_name=self.party_name
@@ -49,7 +50,7 @@ class BookingDetails(Document):
 					doc.append("items",{
 						"item_code":transport.lt,
 						"qty":1,
-						"rate":sum(local_rate)*self.kms
+						"rate":sum(local_rate)*flt(self.kms)
 					})
 				
 				if self.custom_clearing_required:
@@ -75,8 +76,17 @@ class BookingDetails(Document):
 						"qty":1,
 						"rate":self.packaging_charges
 					})
-     
 
+				for k in self.booking_items:
+					doc.append("booking_items",{
+						"length":k.length,
+						"width":k.width,
+						"height":k.height,
+						"weight":k.weight,
+						"numbers":k.numbers,
+						"vw":k.vw,
+						"aw":k.aw
+					})
 				if self.permits_required:
 					pp=[]
 					for i in self.permits_details:
@@ -103,8 +113,8 @@ class BookingDetails(Document):
 				volume=[]
 				actual=[]
 				capacity=[]
-				location.append(self.origin_point)
-				location.append(self.destination)
+				# location.append(self.origin_point)
+				# location.append(self.destination)
 				if self.port_of_exit:
 					location.append(self.port_of_exit)
 				if self.port_of_entry:

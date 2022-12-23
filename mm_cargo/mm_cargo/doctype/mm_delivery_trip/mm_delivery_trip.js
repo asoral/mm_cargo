@@ -43,7 +43,7 @@ frappe.ui.form.on('MM Delivery Trip', {
 			}
 		})
 	},
-
+	
 	refresh: function (frm) {
 		if (frm.doc.docstatus == 1 && frm.doc.employee) {
 			frm.add_custom_button(__('Expense Claim'), function() {
@@ -60,23 +60,23 @@ frappe.ui.form.on('MM Delivery Trip', {
 			});
 		}
 
-		if (frm.doc.docstatus === 0) {
-			frm.add_custom_button(__('Waybill'), () => {
-				erpnext.utils.map_current_doc({
-					method: "mm_cargo.mm_cargo.doctype.waybill.waybill.make_waybill",
-					source_doctype: "Waybill",
-					target: frm,
-					date_field: "posting_date",
-					setters: {
-						company: frm.doc.company,
-					},
-					get_query_filters: {
-						docstatus: 1,
-						company: frm.doc.company,
-					}
-				})
-			}, __("Get customers from"));
-		}
+		// if (frm.doc.docstatus === 0) {
+		// 	frm.add_custom_button(__('Waybill'), () => {
+		// 		erpnext.utils.map_current_doc({
+		// 			method: "mm_cargo.mm_cargo.doctype.waybill.waybill.make_waybill",
+		// 			source_doctype: "Waybill",
+		// 			target: frm,
+		// 			date_field: "posting_date",
+		// 			setters: {
+		// 				company: frm.doc.company,
+		// 			},
+		// 			get_query_filters: {
+		// 				docstatus: 1,
+		// 				company: frm.doc.company,
+		// 			}
+		// 		})
+		// 	}, __("Get customers from"));
+		// }
 	},
 
 	calculate_arrival_time: function (frm) {
@@ -159,6 +159,19 @@ frappe.ui.form.on('MM Delivery Trip', {
 });
 
 frappe.ui.form.on('Delivery Stops', {
+	waybill:function(frm,cdt,cdn){
+		let row = locals[cdt][cdn]
+		console.log("##########################",row.waybill)
+		frappe.call({
+			method:"wb_list",
+			doc:frm.doc,
+			callback:function(r){
+				
+				
+				// console.log("@@@@@@@@@@@@@@@@@@@@@@2",r.message)
+			}
+		})
+	},
 	customer: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
 		if (row.customer) {
@@ -221,6 +234,8 @@ frappe.ui.form.on('Delivery Stops', {
 		} else {
 			frappe.model.set_value(cdt, cdn, "customer_contact", "");
 		}
-	}
+	},
+
 
 });
+
