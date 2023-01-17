@@ -62,6 +62,7 @@ frappe.ui.form.on('Booking Details', {
 
 frappe.ui.form.on('Booking Details Items', {
 	length: function(frm,cdt,cdn){
+		
 		let child = locals[cdt][cdn];
 		if(child.length < 0){
 			frappe.msgprint("Could not accept negative values.");

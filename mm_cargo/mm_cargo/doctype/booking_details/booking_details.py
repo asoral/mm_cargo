@@ -184,6 +184,7 @@ class BookingDetails(Document):
 					for i in self.permits_details:
 						pp.append(i.charges)
 					doc.append("items",{
+						
 						"item_code":transport.pc,
 						"qty":1,
 						"rate":sum(pp)
