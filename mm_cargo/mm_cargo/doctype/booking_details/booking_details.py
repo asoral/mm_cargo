@@ -124,6 +124,7 @@ class BookingDetails(Document):
 					location.append(i.destination_point)
 					doc1=frappe.get_value("Pricing Matrix",{"source":i.origin_point,"dest":i.destination_point,"vehicle_type":i.vehicle_type},["price"])
 					price.append(doc1)
+					print("YYYYYYYYYYYYYYYYYYY",price)
 					if self.need_pickup:
 						local_rate1=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["local_rate"])
 						local_rate.append(local_rate1)
@@ -144,12 +145,13 @@ class BookingDetails(Document):
 				high=0
 				if sum(volume) and sum(actual):
 					high=max(sum(volume),sum(actual))
-				
+				print("TTTTTTTTTTTT",price,capacity)
 				doc.append("items",{
 					"item_code":transport.mmcs,
 					"qty":high,
-					"rate":sum(price)/sum(capacity)
+					"rate":(sum(price))/(sum(capacity))
 				})
+				
 				if self.need_pickup:
 					doc.append("items",{
 						"item_code":transport.lt,
@@ -205,18 +207,16 @@ class BookingDetails(Document):
 				j.height=vh.height
 				value_vw =((j.length * j.height * j.width)/5000)
 				j.vw=value_vw	
-				print("yyyyyyyyyyyyyyyyy",value_vw)
+				j.aw = j.numbers * j.weight
 
 	@frappe.whitelist()
 	def address_(self):
 		list_add=[]
 		pick_add = frappe.db.get_all("Address")
-		print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",pick_add)
 		for a in pick_add:
 			add_c = frappe.get_doc("Address",{'name':a.name})
 			for add_l in add_c.links:
 				if add_l.link_name == self.party_name:
-					print("RRRRRRRRRRRRRRRRRRRRRRRRR",add_c.name)
 					list_add.append(add_c.name)
 		return list_add
 	

@@ -15,7 +15,8 @@ class Waybill(Document):
 			doc=frappe.get_doc("Sales Order",self.sales_order)
 			for i in doc.milestone_list:
 				location.append(i.milestone)
-			return location
+			location=set(location)
+			return list(location)
                 
 	def before_submit(self):
 		doc=frappe.get_doc("Address",self.delivery_address_name)
@@ -23,7 +24,7 @@ class Waybill(Document):
 		# emails = []
 		# for e in email_id:
 		# 	emails.append(e.get('email_id'))
-		msg="<div> Dear <b> {0}</b> <br>".format(d.first_name)
+		msg="<div> Dear <b> {0}</b> <br>".format(d.firsaddresst_name)
 		import random
 
 		a=random.randint(0,9999)
@@ -37,7 +38,7 @@ class Waybill(Document):
 		# for post in messages
 		# "message": message,
 		"message": msg,
-		"message_to": doc.email_id,
+		"message_to": self.delivery_contact_email,
 		# for email
 		"subject":"Waybill OTP",
 		
@@ -155,7 +156,7 @@ class Waybill(Document):
 		print(" outgoing", outgoing)
 
 		if not outgoing:
-			frappe.throw(" Please add Email account with Eable Outgoing and Default Outgoing")
+			frappe.throw(" Please add Email account with Enable Outgoing and Default Outgoing")
 
 		sender      	    = dict()
 		sender['email']     = outgoing 

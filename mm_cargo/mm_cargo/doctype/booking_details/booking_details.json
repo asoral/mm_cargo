@@ -40,11 +40,11 @@
  ],
  "fields": [
   {
-   "default": "FY-.#####",
+   "default": "BD.YY.#####",
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Naming Series",
-   "options": "FY-.#####"
+   "options": "BD.YY.#####"
   },
   {
    "fieldname": "party",
@@ -118,7 +118,8 @@
    "fieldname": "mmcs_transport",
    "fieldtype": "Table",
    "label": "MMCS Transport",
-   "options": "Inhouse Transport Services"
+   "options": "Inhouse Transport Services",
+   "reqd": 1
   },
   {
    "default": "0",
@@ -157,7 +158,8 @@
    "fieldname": "booking_items",
    "fieldtype": "Table",
    "label": "Booking Items",
-   "options": "Booking Details Items"
+   "options": "Booking Details Items",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_15",
@@ -236,7 +238,7 @@
    "link_fieldname": "booking_details"
   }
  ],
- "modified": "2023-01-17 18:07:25.083497",
+ "modified": "2023-01-17 18:31:43.429876",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Booking Details",
