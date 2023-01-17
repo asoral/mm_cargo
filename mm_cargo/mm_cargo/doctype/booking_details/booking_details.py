@@ -74,7 +74,7 @@ class BookingDetails(Document):
 					doc.append("items",{
 						"item_code":transport.sp,
 						"qty":1,
-						"rate":self.packaging_charges
+						"rate":self.packaging_charges1
 					})
 
 				for k in self.booking_items:
@@ -176,7 +176,7 @@ class BookingDetails(Document):
 					doc.append("items",{
 						"item_code":transport.sp,
 						"qty":1,
-						"rate":self.packaging_charges
+						"rate":self.packaging_charges1
 					})
 
 				if self.permits_required:
@@ -184,7 +184,7 @@ class BookingDetails(Document):
 					for i in self.permits_details:
 						pp.append(i.charges)
 					doc.append("items",{
-						
+
 						"item_code":transport.pc,
 						"qty":1,
 						"rate":sum(pp)
@@ -199,8 +199,26 @@ class BookingDetails(Document):
 			frappe.msgprint("Quotation Already Created For This Document")
 
 	def before_save(self):
-		for j in self.booking_items:
-			value_vw =((j.length * j.height * j.width)/5000)
-			j.vw=value_vw
-			print("yyyyyyyyyyyyyyyyy",value_vw)
+		for i in self.mmcs_transport:
+			vh = frappe.get_doc("Vehicle Type",{'name':i.vehicle_type})
+			for j in self.booking_items:
+				j.height=vh.height
+				value_vw =((j.length * j.height * j.width)/5000)
+				j.vw=value_vw	
+				print("yyyyyyyyyyyyyyyyy",value_vw)
+
+	@frappe.whitelist()
+	def address_(self):
+		list_add=[]
+		pick_add = frappe.db.get_all("Address")
+		print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",pick_add)
+		for a in pick_add:
+			add_c = frappe.get_doc("Address",{'name':a.name})
+			for add_l in add_c.links:
+				if add_l.link_name == self.party_name:
+					print("RRRRRRRRRRRRRRRRRRRRRRRRR",add_c.name)
+					list_add.append(add_c.name)
+		return list_add
+	
+		
 			

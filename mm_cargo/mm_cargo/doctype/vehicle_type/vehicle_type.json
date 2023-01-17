@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:vehicle_type",
  "creation": "2022-09-01 15:33:55.525860",
@@ -9,7 +10,10 @@
  "field_order": [
   "vehicle_type",
   "capacity",
-  "local_rate"
+  "local_rate",
+  "length",
+  "width",
+  "height"
  ],
  "fields": [
   {
@@ -27,14 +31,30 @@
    "fieldname": "local_rate",
    "fieldtype": "Float",
    "label": "Local Transport Rate"
+  },
+  {
+   "fieldname": "length",
+   "fieldtype": "Float",
+   "label": "Length"
+  },
+  {
+   "fieldname": "width",
+   "fieldtype": "Float",
+   "label": "Width"
+  },
+  {
+   "fieldname": "height",
+   "fieldtype": "Float",
+   "label": "Height"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-09-01 16:40:33.862297",
+ "modified": "2023-01-17 16:55:47.910619",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Vehicle Type",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -42,14 +62,18 @@
    "delete": 1,
    "email": 1,
    "export": 1,
+   "import": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
+   "set_user_permissions": 1,
    "share": 1,
    "write": 1
   }
  ],
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

@@ -10,6 +10,22 @@ frappe.ui.form.on('Booking Details', {
 				}
 			}
 		});
+		frappe.call({
+			method:"address_",
+			doc:frm.doc,
+			callback:function(r){
+				console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%",r.message)
+				// frm.doc.pickup_address = r.message
+				frm.set_query("pickup_address", function() {
+					return{
+						"filters": {
+							"name": ["in", r.message],
+						}
+					}
+				});
+			}
+
+		})
 	},
 	refresh: function(frm) {
 		frm.fields_dict.custom_region.grid.get_field('agent_name').get_query = function(frm,cdt,cdn) {
@@ -34,6 +50,27 @@ frappe.ui.form.on('Booking Details', {
 			})
 		}
 	},
+	// pickup_address(frm){
+	// 	// if(frm.doc.customer){
+	// 		// frm.set_query("pickup_address", function() {
+	// 		// 	return{
+	// 		// 		"filters": {
+	// 		// 			"": ["in", ["Customer", "Lead"]],
+	// 		// 		}
+	// 		// 	}
+	// 		// });
+	// 		frappe.call({
+	// 			method:"address_",
+	// 			doc:frm.doc,
+	// 			callback:function(r){
+	// 				console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%",r.message)
+
+	// 			}
+
+	// 		})
+	// 	// }
+		
+	// },
 	imp_ex:function(frm){
 		// frm.set_query("location",function(doc){
 			if(frm.doc.imp_ex=="Import"){
@@ -62,7 +99,6 @@ frappe.ui.form.on('Booking Details', {
 
 frappe.ui.form.on('Booking Details Items', {
 	length: function(frm,cdt,cdn){
-		
 		let child = locals[cdt][cdn];
 		if(child.length < 0){
 			frappe.msgprint("Could not accept negative values.");
@@ -96,6 +132,19 @@ frappe.ui.form.on('Booking Details Items', {
 			frappe.msgprint("Could not accept negative values.");
 			child.numbers = 0 
 		}
-	}
+	},
+	// cargo_properties:function(frm,cdt,cdn){
+	// 	let child = locals[cdt][cdn];
+	// 	if(child.cargo_properties == "Non-Stackable"){
+	// 		frappe.call({
+	// 			method:"height_v",
+	// 			doc:frm.doc,
+	// 			callback:function(r){
+	// 				console.log("RRRRRRRRRRRRRRRRRRRRr",r.message.height)
+	// 				child.height = r.message.height
+	// 			}
+	// 		})
+	// 	}
+	// }
 	
 })
