@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "naming_series:",
  "creation": "2022-08-29 17:24:45.447895",
@@ -16,10 +17,8 @@
   "shipment_type",
   "incoterm",
   "section_break_2",
-  "origin_point",
   "port_of_entry",
   "port_of_exit",
-  "destination",
   "mmcs_transport",
   "multimodal_transport",
   "multimodal_details",
@@ -34,6 +33,7 @@
   "column_break_10",
   "special_packaging",
   "packaging_charges",
+  "special_packaging_description",
   "permits_required",
   "permits_details",
   "amended_from"
@@ -50,20 +50,25 @@
    "fieldname": "party",
    "fieldtype": "Link",
    "in_filter": 1,
+   "in_list_view": 1,
    "label": "Party",
-   "options": "DocType"
+   "options": "DocType",
+   "reqd": 1
   },
   {
    "fieldname": "party_name",
    "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
    "label": "Party Name",
-   "options": "party"
+   "options": "party",
+   "reqd": 1
   },
   {
    "fieldname": "imp_ex",
    "fieldtype": "Select",
    "label": "Import / Export",
-   "options": "\nImport\nExport\nDomestic"
+   "options": "\nImport\nExport\nDomestic",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_2",
@@ -71,15 +76,19 @@
    "width": "50"
   },
   {
+   "default": "Now",
    "fieldname": "booking_date",
    "fieldtype": "Date",
-   "label": "Booking Date"
+   "in_list_view": 1,
+   "label": "Booking Date",
+   "reqd": 1
   },
   {
    "fieldname": "shipment_type",
    "fieldtype": "Select",
    "label": "Shipment Type",
-   "options": "\nConsolidated\nDedicated"
+   "options": "\nConsolidated\nDedicated",
+   "reqd": 1
   },
   {
    "fieldname": "incoterm",
@@ -90,12 +99,6 @@
   {
    "fieldname": "section_break_2",
    "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "origin_point",
-   "fieldtype": "Link",
-   "label": "Origin Point",
-   "options": "Location"
   },
   {
    "depends_on": "eval:doc.imp_ex==\"Import\"",
@@ -109,12 +112,6 @@
    "fieldname": "port_of_exit",
    "fieldtype": "Link",
    "label": "Port of Exit",
-   "options": "Location"
-  },
-  {
-   "fieldname": "destination",
-   "fieldtype": "Link",
-   "label": "Destination",
    "options": "Location"
   },
   {
@@ -133,6 +130,7 @@
    "depends_on": "eval:doc.multimodal_transport==1",
    "fieldname": "multimodal_details",
    "fieldtype": "Table",
+   "hidden": 1,
    "label": "Multimodal Details",
    "options": "Multimodal Details"
   },
@@ -173,8 +171,9 @@
   {
    "depends_on": "eval:doc.need_pickup==1",
    "fieldname": "pickup_address",
-   "fieldtype": "Data",
-   "label": "Pick Up Address"
+   "fieldtype": "Link",
+   "label": "Pick Up Address",
+   "options": "Lead"
   },
   {
    "depends_on": "eval:doc.need_pickup==1",
@@ -196,7 +195,7 @@
   {
    "depends_on": "eval:doc.special_packaging==1",
    "fieldname": "packaging_charges",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "label": "Packaging Charges"
   },
   {
@@ -220,32 +219,51 @@
    "options": "Booking Details",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.special_packaging==1",
+   "fieldname": "special_packaging_description",
+   "fieldtype": "Text Editor",
+   "label": "Special Packaging Description"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [],
- "modified": "2022-09-01 15:29:38.079424",
+ "links": [
+  {
+   "link_doctype": "Quotation",
+   "link_fieldname": "booking_details"
+  }
+ ],
+ "modified": "2023-01-17 15:50:40.553541",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Booking Details",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
+   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
    "export": 1,
+   "import": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "select": 1,
+   "set_user_permissions": 1,
    "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],
  "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
+ "states": [],
  "track_changes": 1
 }

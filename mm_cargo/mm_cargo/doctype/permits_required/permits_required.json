@@ -16,31 +16,35 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Type",
-   "options": "Permit Type"
+   "options": "Permit Type",
+   "reqd": 1
   },
   {
    "fetch_from": "permit_type.description",
    "fieldname": "desription",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Desription"
+   "label": "Description",
+   "reqd": 1
   },
   {
    "fieldname": "charges",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Charges"
+   "label": "Charges",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-09-14 12:44:43.950428",
+ "modified": "2023-01-17 12:37:05.677580",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Permits Required",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

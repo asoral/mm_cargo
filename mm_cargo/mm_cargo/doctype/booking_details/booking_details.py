@@ -61,7 +61,7 @@ class BookingDetails(Document):
 						doc.append("custom_region",{
 							"location":j.location,
 							"agent_inhouse":j.agent_inhouse,
-							"agent_name":j.agent_name,
+							"agent_name":loc.name,
 							"amount":j.amount
 						})
 					doc.append("items",{
@@ -196,6 +196,10 @@ class BookingDetails(Document):
 				frappe.msgprint("Quotation Created")
 		else:
 			frappe.msgprint("Quotation Already Created For This Document")
-   
-   
-  
+
+	def before_save(self):
+		for j in self.booking_items:
+			value_vw =((j.length * j.height * j.width)/5000)
+			j.vw=value_vw
+			print("yyyyyyyyyyyyyyyyy",value_vw)
+			
