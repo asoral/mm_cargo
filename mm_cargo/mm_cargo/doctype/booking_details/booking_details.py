@@ -204,10 +204,11 @@ class BookingDetails(Document):
 		for i in self.mmcs_transport:
 			vh = frappe.get_doc("Vehicle Type",{'name':i.vehicle_type})
 			for j in self.booking_items:
-				j.height=vh.height
+				if j.cargo_properties == "Non-Stackable":
+					j.height=vh.height
 				value_vw =((j.length * j.height * j.width)/5000)
 				j.vw=value_vw	
-				j.aw = j.numbers * j.weight
+				j.aw = j.numbers * j.weight	
 
 	@frappe.whitelist()
 	def address_(self):

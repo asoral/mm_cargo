@@ -60,20 +60,15 @@ class MMDeliveryTrip(Document):
 		lst = []
 		w_list=[]
 		for i in self.delivery_stops:
-			# w_list.append(i.waybill)
-			# if i.waybill in w_list:
-			# 	frappe.throw("Waybill is repeated")
-			mil = frappe.get_doc("Waybill",{"name":i.waybill})
-			for l in self.milestone_list:
-				lst.append(l.milestone)
+			mil = frappe.get_doc("Waybill",{"name":i.waybill})				
 			for j in mil.milestone_list:
+				lst.append(j.milestone)
+		lst=set(lst)	
+		for k in lst:	
+			self.append("milestone_list",{
+			"milestone":k,
+		})
 
-				if j.milestone not in lst :
-					self.append("milestone_list",{
-					"milestone":j.milestone,
-					# "timestamp":datetime.now()
-				})
-	
 	def before_update_after_submit(self):
 		for r in self.milestone_list:
 			if r.delivered == 1:

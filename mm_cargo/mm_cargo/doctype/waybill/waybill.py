@@ -8,16 +8,19 @@ from frappe.model.mapper import get_mapped_doc
 from frappe.utils.data import flt
 
 class Waybill(Document):
-	@frappe.whitelist()
-	def get_locations(self):
+	def before_save(self):
 		location=[]
-		if self.sales_order:
-			doc=frappe.get_doc("Sales Order",self.sales_order)
-			for i in doc.milestone_list:
+		doc=frappe.get_doc("Sales Order",self.sales_order)
+		for i in doc.milestone_list:
+			if i.milestone not in location:
 				location.append(i.milestone)
-			location=set(location)
-			return list(location)
-                
+		location=set(location)
+		self.milestone_list=[]
+		for i in list(location):
+			self.append("milestone_list",{
+				"milestone":i
+			})
+		
 	def before_submit(self):
 		doc=frappe.get_doc("Address",self.delivery_address_name)
 		d=frappe.get_doc('User', frappe.session.user)
@@ -83,7 +86,7 @@ class Waybill(Document):
 	@frappe.whitelist()
 	def d_address(self):
 		doc = frappe.get_all("Dynamic Link",{"link_doctype":"Customer","link_name":self.delivery_customer,"parenttype":"Address"},["parent"])
-		c_doc = frappe.get_all("Dynamic Link",{"link_doctype":"Customer","link_name":self.pickup_customer,"parenttype":"Contact"},["parent"])
+		c_doc = frappe.get_all("Dynamic Link",{"link_doctype":"Customer","link_name":self.delivery_customer,"parenttype":"Contact"},["parent"])
 		list_adr1=[]
 		list_con1=[]
 		for c_ads in doc:
@@ -178,8 +181,6 @@ class Waybill(Document):
 @frappe.whitelist()
 def make_waybill(source_name, target_doc="Delivery Stops"):
 	def update_stop_details(source_doc, target_doc,source_parent):
-		# print("888888888888888888",target_doc.doctype)
-		print("#########55555555555555")
 		target_doc.customer = source_parent.delivery_customer
 		target_doc.address = source_parent.delivery_address_name
 		if source_parent.sales_order:
@@ -191,7 +192,6 @@ def make_waybill(source_name, target_doc="Delivery Stops"):
 
 		# Append unique Delivery Notes in Delivery Trip
 		waybills.append(source_doc.name)
-	print("&&&&&&&&&&&&&&&&&&&&&&&&&&&")
 	waybills = []
 
 	doclist = get_mapped_doc(
@@ -208,6 +208,5 @@ def make_waybill(source_name, target_doc="Delivery Stops"):
 		},
 		target_doc,
 	)
-	print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6",doclist)
 	return doclist
 

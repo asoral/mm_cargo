@@ -3,15 +3,16 @@
 
 frappe.ui.form.on('Waybill', {
 	refresh: function(frm) {
-		frappe.call({
-			method: "get_locations",
-			doc:frm.doc,
-			callback: (data) => {
-				// console.log("&&&&&&&&&&&&&&&&&&&777",data.message)
-				// frm.set_df_property('delivery_milestone', 'options', data.message);
-				// frm.refresh_field("delivery_milestone")
-			}
-		});
+		// frappe.call({
+		// 	method: "get_locations",
+		// 	doc:frm.doc,
+		// 	callback: (data) => {
+		// 		// console.log("&&&&&&&&&&&&&&&&&&&777",data.message)
+		// 		// frm.set_df_property('delivery_milestone', 'options', data.message);
+		// 		// frm.refresh_field("delivery_milestone")
+		// 	}
+		// });
+
 	},
 	pickup_customer: function(frm) {
 		frappe.call({
@@ -49,6 +50,7 @@ frappe.ui.form.on('Waybill', {
 					}
 				});
 				frm.set_query("delivery_contact_name", function() {
+					console.log("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPp",r.message[1])
 					return {
 						filters: [
 							["name" , "in" , r.message[1]]

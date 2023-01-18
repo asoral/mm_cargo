@@ -10,24 +10,28 @@ frappe.ui.form.on('Booking Details', {
 				}
 			}
 		});
-		frappe.call({
-			method:"address_",
-			doc:frm.doc,
-			callback:function(r){
-				console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%",r.message)
-				// frm.doc.pickup_address = r.message
-				frm.set_query("pickup_address", function() {
-					return{
-						"filters": {
-							"name": ["in", r.message],
+	},
+	party_name:function(frm){
+				frappe.call({
+				method:"address_",
+				doc:frm.doc,
+				callback:function(r){
+					console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%",r.message)
+					// frm.doc.pickup_address = r.message
+					frm.set_query("pickup_address", function() {
+						return{
+							"filters": {
+								"name": ["in", r.message],
+							}
 						}
-					}
-				});
-			}
-
-		})
+					});
+				}
+	
+			})
+		
 	},
 	refresh: function(frm) {
+		
 		frm.fields_dict.custom_region.grid.get_field('agent_name').get_query = function(frm,cdt,cdn) {
 			let child =locals[cdt][cdn]
 			return {
@@ -49,6 +53,38 @@ frappe.ui.form.on('Booking Details', {
 				});
 			})
 		}
+
+		frm.fields_dict.mmcs_transport.grid.get_field("origin_point").get_query = function(frm,cdt,cdn){
+			let child =locals[cdt][cdn]
+			return {
+				filters:{
+					"import" : 0,
+					"export" : 0
+			}
+			}
+		}
+
+		frm.fields_dict.mmcs_transport.grid.get_field("destination_point").get_query = function(frm,cdt,cdn){
+			let child =locals[cdt][cdn]
+			return {
+				filters:{
+					"import" : 0,
+					"export" : 0
+			}
+			}
+		}
+
+		frm.fields_dict.custom_region.grid.get_field("location").get_query = function(frm,cdt,cdn){
+			let child =locals[cdt][cdn]
+			return {
+				filters:{
+					"import" : 0,
+					"export" : 0
+			}
+			}
+		}
+
+		
 	},
 	// pickup_address(frm){
 	// 	// if(frm.doc.customer){
@@ -74,7 +110,6 @@ frappe.ui.form.on('Booking Details', {
 	imp_ex:function(frm){
 		// frm.set_query("location",function(doc){
 			if(frm.doc.imp_ex=="Import"){
-				console.log("%%%%%%%%%%%%%%%%%%%%%%%%%55")
 				frm.set_query("port_of_entry",function(doc){
 					return{
 						filters:{
@@ -133,18 +168,19 @@ frappe.ui.form.on('Booking Details Items', {
 			child.numbers = 0 
 		}
 	},
-	// cargo_properties:function(frm,cdt,cdn){
-	// 	let child = locals[cdt][cdn];
-	// 	if(child.cargo_properties == "Non-Stackable"){
-	// 		frappe.call({
-	// 			method:"height_v",
-	// 			doc:frm.doc,
-	// 			callback:function(r){
-	// 				console.log("RRRRRRRRRRRRRRRRRRRRr",r.message.height)
-	// 				child.height = r.message.height
-	// 			}
-	// 		})
-	// 	}
-	// }
 	
-})
+});
+
+// frappe.ui.form.on("Inhouse Transport Services",{
+// 	refresh:function(frm,cdt,cdn){
+// 		let child = locals[cdt][cdn];
+// 		frm.set_query("origin_point", function() {
+// 			return{
+// 				"filters": {
+// 					"name": ["not in", r.message],
+// 				}
+// 			}
+// 		});
+// 	}
+
+// })
