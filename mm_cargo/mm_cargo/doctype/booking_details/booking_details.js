@@ -32,14 +32,14 @@ frappe.ui.form.on('Booking Details', {
 	},
 	refresh: function(frm) {
 		
-		frm.fields_dict.custom_region.grid.get_field('agent_name').get_query = function(frm,cdt,cdn) {
-			let child =locals[cdt][cdn]
-			return {
-				filters:{
-					"partner_type":["=",child.agent_inhouse]
-				}
-			}
-		}
+		// frm.fields_dict.custom_region.grid.get_field('agent_name').get_query = function(frm,cdt,cdn) {
+		// 	let child =locals[cdt][cdn]
+		// 	return {
+		// 		filters:{
+		// 			"partner_type":["=",child.agent_inhouse]
+		// 		}
+		// 	}
+		// }
 		
 		if(frm.doc.docstatus==1){
 			frm.add_custom_button(__('Create Quotation'), function() {
@@ -52,6 +52,15 @@ frappe.ui.form.on('Booking Details', {
 					}
 				});
 			})
+		}
+
+		frm.fields_dict.custom_region.grid.get_field('agent_name').get_query = function(frm,cdt,cdn) {
+			let child =locals[cdt][cdn]
+			return {
+				filters:{
+					"partner_type":["=",child.agent_inhouse]
+				}
+			}
 		}
 
 		frm.fields_dict.mmcs_transport.grid.get_field("origin_point").get_query = function(frm,cdt,cdn){

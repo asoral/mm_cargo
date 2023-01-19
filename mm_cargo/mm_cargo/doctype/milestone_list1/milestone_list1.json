@@ -1,12 +1,14 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2022-09-03 17:09:03.554600",
+ "creation": "2023-01-18 16:54:40.797063",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "milestone",
+  "waybill",
   "timestamp",
   "delivered"
  ],
@@ -17,6 +19,13 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Delivery Milestone"
+  },
+  {
+   "fieldname": "waybill",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Waybill",
+   "options": "Waybill"
   },
   {
    "allow_on_submit": 1,
@@ -31,6 +40,7 @@
    "default": "0",
    "fieldname": "delivered",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Delivered"
   }
@@ -38,10 +48,10 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-01-18 16:52:10.559380",
+ "modified": "2023-01-18 17:03:01.816114",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
- "name": "Milestone List",
+ "name": "Milestone List1",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

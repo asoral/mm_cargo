@@ -42,6 +42,18 @@ frappe.ui.form.on('MM Delivery Trip', {
 				};
 			}
 		})
+
+			
+		frm.fields_dict.delivery_stops.grid.get_field('waybill').get_query = function(frm,cdt,cdn) {
+			let child =locals[cdt][cdn]
+			return {
+				filters:{
+					"docstatus":["=",1]
+				}
+			}
+		}
+
+
 	},
 	
 	refresh: function (frm) {
@@ -161,7 +173,6 @@ frappe.ui.form.on('MM Delivery Trip', {
 frappe.ui.form.on('Delivery Stops', {
 	waybill:function(frm,cdt,cdn){
 		let row = locals[cdt][cdn]
-		console.log("##########################",row.waybill)
 		frappe.call({
 			method:"wb_list",
 			doc:frm.doc,

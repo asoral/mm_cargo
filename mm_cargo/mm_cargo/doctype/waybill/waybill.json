@@ -1,13 +1,14 @@
 {
  "actions": [],
- "autoname": "series",
+ "allow_import": 1,
+ "autoname": "naming_series:",
  "creation": "2022-08-29 17:50:30.663159",
  "doctype": "DocType",
  "document_type": "System",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "series",
+  "naming_series",
   "posting_date",
   "company",
   "heading_pickup_from",
@@ -68,12 +69,6 @@
   "amended_from"
  ],
  "fields": [
-  {
-   "fieldname": "series",
-   "fieldtype": "Select",
-   "label": "Series",
-   "options": "WB-############"
-  },
   {
    "fieldname": "heading_pickup_from",
    "fieldtype": "Heading",
@@ -459,7 +454,6 @@
    "label": "Verification Code"
   },
   {
-   "allow_on_submit": 1,
    "fieldname": "milestone_list",
    "fieldtype": "Table",
    "label": "Milestone List",
@@ -470,7 +464,7 @@
    "fieldname": "delivery_status",
    "fieldtype": "Select",
    "label": "Delivery Status",
-   "options": "\nDelivered"
+   "options": "\nMMCS Warehouse\nPre Dispatch documentation\nLoaded for disptach\nIn Transit-Pre Clearance\nCustoms Clearance Process\nIn Transit-Post Clearance\nCancelled/Withdrawn\nDelivered"
   },
   {
    "allow_on_submit": 1,
@@ -478,19 +472,26 @@
    "fieldname": "otp",
    "fieldtype": "Int",
    "label": "OTP"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "WB-.############"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2022-12-22 11:22:09.234948",
+ "modified": "2023-01-19 10:46:11.771684",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Waybill",
  "name_case": "Title Case",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
+   "amend": 1,
    "cancel": 1,
    "create": 1,
    "delete": 1,
@@ -500,22 +501,24 @@
    "read": 1,
    "report": 1,
    "role": "Stock Manager",
-   "select": 1,
    "share": 1,
    "submit": 1,
    "write": 1
   },
   {
+   "amend": 1,
    "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
    "export": 1,
+   "import": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "System Manager",
    "select": 1,
+   "set_user_permissions": 1,
    "share": 1,
    "submit": 1,
    "write": 1

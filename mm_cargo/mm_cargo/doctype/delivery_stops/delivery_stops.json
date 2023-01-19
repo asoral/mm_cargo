@@ -9,6 +9,7 @@
   "customer",
   "address",
   "customer_address",
+  "status_milestones",
   "delivered",
   "column_break_6",
   "visited",
@@ -184,11 +185,19 @@
    "in_standard_filter": 1,
    "label": "Delivered",
    "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status_milestones",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status/Milestones",
+   "options": "\nMMCS Warehouse\nPre Dispatch documentation\nLoaded for disptach\nIn Transit-Pre Clearance\nCustoms Clearance Process\nIn Transit-Post Clearance\nCancelled/Withdrawn\nDelivered"
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2022-12-22 15:26:50.995566",
+ "modified": "2023-01-19 10:47:01.415124",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Delivery Stops",

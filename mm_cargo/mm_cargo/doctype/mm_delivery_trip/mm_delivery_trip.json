@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "autoname": "naming_series:",
  "creation": "2022-09-21 12:09:19.374278",
  "doctype": "DocType",
@@ -21,6 +22,7 @@
   "column_break_4",
   "vehicle",
   "departure_time",
+  "status_milestones",
   "employee",
   "delivery_service_stops",
   "delivery_stops",
@@ -139,7 +141,6 @@
    "label": "Delivery Stops"
   },
   {
-   "allow_on_submit": 1,
    "fieldname": "delivery_stops",
    "fieldtype": "Table",
    "label": "Delivery Stop",
@@ -151,6 +152,7 @@
    "description": "Use Google Maps Direction API to calculate estimated arrival times",
    "fieldname": "calculate_arrival_time",
    "fieldtype": "Button",
+   "hidden": 1,
    "label": "Calculate Estimated Arrival Times"
   },
   {
@@ -158,6 +160,7 @@
    "description": "Use Google Maps Direction API to optimize route",
    "fieldname": "optimize_route",
    "fieldtype": "Button",
+   "hidden": 1,
    "label": "Optimize Route"
   },
   {
@@ -168,6 +171,7 @@
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "hidden": 1,
    "in_standard_filter": 1,
    "label": "Status",
    "no_copy": 1,
@@ -202,12 +206,18 @@
    "fieldname": "milestone_list",
    "fieldtype": "Table",
    "label": "Milestone List",
-   "options": "Milestone List"
+   "options": "Milestone List1"
+  },
+  {
+   "fieldname": "status_milestones",
+   "fieldtype": "Select",
+   "label": "Status/Milestones",
+   "options": "\nMMCS Warehouse\nPre Dispatch documentation\nLoaded for disptach\nIn Transit-Pre Clearance\nCustoms Clearance Process\nIn Transit-Post Clearance\nCancelled/Withdrawn\nDelivered"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2022-12-22 14:32:10.475446",
+ "modified": "2023-01-19 10:46:26.777397",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "MM Delivery Trip",
@@ -221,10 +231,13 @@
    "delete": 1,
    "email": 1,
    "export": 1,
+   "import": 1,
    "print": 1,
    "read": 1,
    "report": 1,
    "role": "Fulfillment User",
+   "select": 1,
+   "set_user_permissions": 1,
    "share": 1,
    "submit": 1,
    "write": 1

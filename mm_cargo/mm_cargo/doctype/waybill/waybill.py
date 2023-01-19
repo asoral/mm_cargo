@@ -27,7 +27,7 @@ class Waybill(Document):
 		# emails = []
 		# for e in email_id:
 		# 	emails.append(e.get('email_id'))
-		msg="<div> Dear <b> {0}</b> <br>".format(d.firsaddresst_name)
+		msg="<div> Dear <b> {0}</b> <br>".format(d.first_name)
 		import random
 
 		a=random.randint(0,9999)

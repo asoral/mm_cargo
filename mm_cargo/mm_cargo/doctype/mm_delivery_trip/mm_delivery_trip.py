@@ -57,19 +57,41 @@ class MMDeliveryTrip(Document):
 		self.db_set("status", status)
 	
 	def before_save(self):
-		lst = []
-		w_list=[]
+		# lst = []
+		# w_list=[]
+		# for i in self.delivery_stops:
+		# 	mil = frappe.get_doc("Waybill",{"name":i.waybill})				
+		# 	for j in mil.milestone_list:
+		# 		lst.append(j.milestone)
+		# lst=set(lst)	
+		# for k in lst:	
+		# 	self.append("milestone_list",{
+		# 	"milestone":k,
+		# })
 		for i in self.delivery_stops:
-			mil = frappe.get_doc("Waybill",{"name":i.waybill})				
+			mil = frappe.get_doc("Waybill",{"name":i.waybill})
 			for j in mil.milestone_list:
-				lst.append(j.milestone)
-		lst=set(lst)	
-		for k in lst:	
-			self.append("milestone_list",{
-			"milestone":k,
-		})
+				self.append("milestone_list",{
+					"milestone":j.milestone,
+					"waybill":i.waybill
+				})
+		for a in self.delivery_stops:
+			a.status_milestones = self.status_milestones
+
 
 	def before_update_after_submit(self):
+		
+		for ml in self.delivery_stops:
+			# wb_id = frappe.get_doc("Waybill",{'name':ml.waybill})
+			# print("EEEEEEEEEEEEEEEEEEEEEEEEEEeee",wb_id.name)
+			# if ml.waybill == wb_id.name:
+			# 	frappe.db.set_value()
+			frappe.db.set_value("Waybill",{"name":ml.waybill},{
+									# "delivered":1,
+									"delivery_status":ml.status_milestones,
+								
+							})
+
 		for r in self.milestone_list:
 			if r.delivered == 1:
 				if r.timestamp:
@@ -81,10 +103,11 @@ class MMDeliveryTrip(Document):
 					wb_ts = frappe.get_doc("Waybill",{"name":k.waybill})
 					for j in wb_ts.milestone_list:
 
-						if j.milestone == r.milestone and r.delivered == 1:
+						if j.milestone == r.milestone and r.delivered == 1 and wb_ts.name == r.waybill:
 							frappe.db.set_value("Milestone List",{"parent":wb_ts.name,"milestone":j.milestone},{
 									"delivered":1,
-									"timestamp":r.timestamp
+									"timestamp":r.timestamp,
+								
 							})
 						else:
 							pass
@@ -98,13 +121,23 @@ class MMDeliveryTrip(Document):
 	@frappe.whitelist()
 	def wb_list(self):
 		w_list=[]
+	
 		for i in self.delivery_stops:
+			# wb_s = frappe.get_doc("Waybill",{'name':i.waybill})
+			# if wb_s.docstatus == 1:
 			w_list.append(i.waybill)
+				
+		# wb_s = frappe.get_doc("Waybill",{'name':i.waybill})
+		# if wb_s.docstatus == 1:
+		# 	w_list.pop()
+		# else:
+		# 	frappe.msgprint("Waybill is not a submitted")
+		# 	i.waybill=""
+		print("GGGGGGGGGGGGGGGGGGGGGGGG",w_list)
 		w_list.pop()
 		if i.waybill in w_list:
 			frappe.msgprint("Waybill is repeated")
 			i.waybill=""
-		print("&&&&&&&&&&&&&&&&&&&&&&&&&7777",w_list)
 		# return w_list
 					# print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",k.milestone)
 					
