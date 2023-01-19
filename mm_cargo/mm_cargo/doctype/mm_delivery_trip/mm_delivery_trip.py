@@ -55,8 +55,19 @@ class MMDeliveryTrip(Document):
 				status = "In Transit"
 
 		self.db_set("status", status)
+
+	@frappe.whitelist()
+	def list_m(self):
+		m_list = ["",]
+		for i in self.delivery_stops:
+			mil = frappe.get_doc("Waybill",{"name":i.waybill})
+			for j in mil.milestone_list:
+				m_list.append(j.milestone)
+		return m_list
+
 	
 	def before_save(self):
+		# m_list = []
 		for i in self.delivery_stops:
 			mil = frappe.get_doc("Waybill",{"name":i.waybill})
 			for j in mil.milestone_list:
@@ -64,18 +75,37 @@ class MMDeliveryTrip(Document):
 					"milestone":j.milestone,
 					"waybill":i.waybill
 				})
-		for a in self.delivery_stops:
-			a.status_milestones = self.status_milestones
+			# j.milestone=set(j.milestone)
+		
+			# for a in self.delivery_stops:
+			# 	a.status_milestones = self.status_milestones
 
+		
 
 	def before_update_after_submit(self):
+
+
 		
+		for a in self.delivery_stops:
+			if a.status_milestones:
+				pass
+			else:		
+				a.status_milestones = self.status_milestones
+
 		for ml in self.delivery_stops:
 			frappe.db.set_value("Waybill",{"name":ml.waybill},{
 									"delivery_status":ml.status_milestones,
 							})
 
+		# for mil in self.milestone_list:
+		# 	if mil.milestone 
+		# 	# add_m = frappe.get_doc("Waybill",{"name":mil.waybill})
+		# 	# for add_list in add_m.milestone_list:
+				
+
 		for r in self.milestone_list:
+			if r.milestone == self.milestone:
+				r.delivered = 1
 			if r.delivered == 1:
 				if r.timestamp:
 					pass
@@ -97,7 +127,7 @@ class MMDeliveryTrip(Document):
 							
 			else:
 				r.timestamp = ""
-				
+					
 		
 
 

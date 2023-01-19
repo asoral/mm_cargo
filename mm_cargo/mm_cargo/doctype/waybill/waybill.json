@@ -464,7 +464,7 @@
    "fieldname": "delivery_status",
    "fieldtype": "Select",
    "label": "Delivery Status",
-   "options": "\nMMCS Warehouse\nPre Dispatch documentation\nLoaded for disptach\nIn Transit-Pre Clearance\nCustoms Clearance Process\nIn Transit-Post Clearance\nCancelled/Withdrawn\nDelivered"
+   "options": "\nWith Supplier-(Not collected/Delivered)\nMMCS Warehouse\nPre Dispatch documentation\nLoaded for disptach\nIn Transit-Pre Clearance\nCustoms Clearance Process\nIn Transit-Post Clearance\nDelivered\nCancelled/Withdrawn"
   },
   {
    "allow_on_submit": 1,
@@ -482,7 +482,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-01-19 12:44:49.835375",
+ "modified": "2023-01-19 15:39:09.001641",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Waybill",

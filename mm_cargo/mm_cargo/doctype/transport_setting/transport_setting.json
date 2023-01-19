@@ -9,6 +9,8 @@
   "mmcs",
   "mm",
   "cc",
+  "item_group",
+  "column_break_5",
   "lt",
   "pc",
   "sp"
@@ -49,12 +51,22 @@
    "fieldtype": "Link",
    "label": "Default Special  Packaging  Item",
    "options": "Item"
+  },
+  {
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Item Group(Customs Clearing)",
+   "options": "Item Group"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2022-09-01 16:28:45.199544",
+ "modified": "2023-01-19 15:21:35.023594",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Transport Setting",
@@ -67,10 +79,12 @@
    "print": 1,
    "read": 1,
    "role": "System Manager",
+   "select": 1,
    "share": 1,
    "write": 1
   }
  ],
  "sort_field": "modified",
- "sort_order": "DESC"
+ "sort_order": "DESC",
+ "states": []
 }

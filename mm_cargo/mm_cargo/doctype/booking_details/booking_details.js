@@ -93,6 +93,20 @@ frappe.ui.form.on('Booking Details', {
 			}
 		}
 
+		frappe.call({
+			method:"item_list",
+			doc:frm.doc,
+			callback:function(r){
+				frm.fields_dict.custom_region.grid.get_field('item').get_query = function(frm,cdt,cdn) {
+					let child =locals[cdt][cdn]
+					return {
+						filters:{
+							"name":["in",r.message]
+						}
+					}
+				}
+			}
+		})
 		
 	},
 	// pickup_address(frm){
@@ -140,6 +154,29 @@ frappe.ui.form.on('Booking Details', {
 	}
 
 });
+
+// frappe.ui.form.on('Custom Borders',{
+
+// 	location:function(frm,cdt,cdn){
+// 		let child = locals[cdt][cdn];
+// 		frappe.call({
+// 			method:"item_list",
+// 			doc:frm.doc,
+// 			callback:function(r){
+// 				frm.fields_dict.custom_region.grid.get_field('agent_name').get_query = function(frm,cdt,cdn) {
+// 					let child =locals[cdt][cdn]
+// 					return {
+// 						filters:{
+// 							"partner_type":["=",child.agent_inhouse]
+// 						}
+// 					}
+// 				}
+// 			}
+// 		})
+// 	}
+
+// });
+
 
 frappe.ui.form.on('Booking Details Items', {
 	length: function(frm,cdt,cdn){

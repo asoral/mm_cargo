@@ -216,6 +216,15 @@ class BookingDetails(Document):
 				j.aw = j.numbers * j.weight	
 
 	@frappe.whitelist()
+	def item_list(self):
+		item_list = []
+		t_setting = frappe.get_doc("Transport Setting")	
+		for i in self.custom_region:
+			itm = frappe.get_doc("Item",{'item_group':t_setting.item_group})	
+			item_list.append(itm.name)
+		return item_list
+
+	@frappe.whitelist()
 	def address_(self):
 		list_add=[]
 		pick_add = frappe.db.get_all("Address")

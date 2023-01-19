@@ -53,10 +53,49 @@ frappe.ui.form.on('MM Delivery Trip', {
 			}
 		}
 
+		// frappe.call({
+		// 	method:"list_m",
+		// 	doc:frm.doc,
+		// 	callback:function(r){
+		// 		frm.set_df_property("milestone", "options", r.message);
+		// 	}
+		// })
 
 	},
 	
 	refresh: function (frm) {
+
+		// frm.set_query("milestone", function () {
+		// 	return {
+		// 		filters: {
+		// 			"name": ["in",r.message]
+		// 		}
+		// 	};
+		// });
+
+
+
+		// $.each(frm.doc.delivery_stops,function(i,v){
+		// 	console.log("YYYYYYYYYYYYYYYYYYYYyy",v.waybill)
+		
+			
+		// 	// $.each(mil_list.milestone_list,function(j,k){
+		// 	// 	console.log("UUUUUUUUUUUUUUUUUUUUUUUUUu",k.milestone)
+		// 	// })
+		// })
+		
+		if(!frm.doc.__islocal){
+			frappe.call({
+				method:"list_m",
+				doc:frm.doc,
+				callback:function(r){
+					frm.set_df_property("milestone", "options", r.message);
+				}
+			})
+	
+		}
+		
+
 		if (frm.doc.docstatus == 1 && frm.doc.employee) {
 			frm.add_custom_button(__('Expense Claim'), function() {
 				frappe.model.open_mapped_doc({
