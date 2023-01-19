@@ -27,7 +27,9 @@ class BookingDetails(Document):
 					doc.append("mmcs_transport",{
 						"origin_point":i.origin_point,
 						"destination_point":i.destination_point,
-						"vehicle_type":i.vehicle_type
+						"vehicle_type":i.vehicle_type,
+						"additional_charge":i.additional_charge,
+						"additional_trailer":i.additional_trailer
 					})
 					location.append(i.origin_point)
 					location.append(i.destination_point)
@@ -61,7 +63,7 @@ class BookingDetails(Document):
 						doc.append("custom_region",{
 							"location":j.location,
 							"agent_inhouse":j.agent_inhouse,
-							"agent_name":loc.name,
+							"agent_name":j.agent_name,
 							"amount":j.amount
 						})
 					doc.append("items",{
@@ -85,7 +87,10 @@ class BookingDetails(Document):
 						"weight":k.weight,
 						"numbers":k.numbers,
 						"vw":k.vw,
-						"aw":k.aw
+						"aw":k.aw,
+						"cargo":k.cargo,
+						"cargo_properties":k.cargo_properties,
+						"state_of_cargo":k.state_of_cargo
 					})
 				if self.permits_required:
 					pp=[]

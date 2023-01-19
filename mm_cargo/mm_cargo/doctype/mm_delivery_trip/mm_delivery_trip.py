@@ -57,17 +57,6 @@ class MMDeliveryTrip(Document):
 		self.db_set("status", status)
 	
 	def before_save(self):
-		# lst = []
-		# w_list=[]
-		# for i in self.delivery_stops:
-		# 	mil = frappe.get_doc("Waybill",{"name":i.waybill})				
-		# 	for j in mil.milestone_list:
-		# 		lst.append(j.milestone)
-		# lst=set(lst)	
-		# for k in lst:	
-		# 	self.append("milestone_list",{
-		# 	"milestone":k,
-		# })
 		for i in self.delivery_stops:
 			mil = frappe.get_doc("Waybill",{"name":i.waybill})
 			for j in mil.milestone_list:
@@ -82,14 +71,8 @@ class MMDeliveryTrip(Document):
 	def before_update_after_submit(self):
 		
 		for ml in self.delivery_stops:
-			# wb_id = frappe.get_doc("Waybill",{'name':ml.waybill})
-			# print("EEEEEEEEEEEEEEEEEEEEEEEEEEeee",wb_id.name)
-			# if ml.waybill == wb_id.name:
-			# 	frappe.db.set_value()
 			frappe.db.set_value("Waybill",{"name":ml.waybill},{
-									# "delivered":1,
 									"delivery_status":ml.status_milestones,
-								
 							})
 
 		for r in self.milestone_list:
