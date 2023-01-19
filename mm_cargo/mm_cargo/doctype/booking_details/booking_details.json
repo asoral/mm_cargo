@@ -238,7 +238,7 @@
    "link_fieldname": "booking_details"
   }
  ],
- "modified": "2023-01-18 13:00:44.147589",
+ "modified": "2023-01-19 12:42:43.344158",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Booking Details",
@@ -262,6 +262,15 @@
    "share": 1,
    "submit": 1,
    "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Transport Customer",
+   "share": 1
   }
  ],
  "sort_field": "modified",

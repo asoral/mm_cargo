@@ -186,3 +186,15 @@ user_data_fields = [
 # Recommended only for DocTypes which have limited documents with untranslated names
 # For example: Role, Gender, etc.
 # translated_search_doctypes = []
+
+
+fixtures=[
+	{
+		"doctype": "Custom DocPerm",
+		"filters":[
+			[
+				"role","in",["Payment Entry","Sales Order","Sales Invoice"]
+			]
+		]
+	}
+]

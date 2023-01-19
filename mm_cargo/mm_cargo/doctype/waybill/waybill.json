@@ -482,7 +482,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-01-19 10:46:11.771684",
+ "modified": "2023-01-19 12:44:49.835375",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Waybill",
@@ -519,6 +519,17 @@
    "role": "System Manager",
    "select": 1,
    "set_user_permissions": 1,
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Transport Customer",
    "share": 1,
    "submit": 1,
    "write": 1
