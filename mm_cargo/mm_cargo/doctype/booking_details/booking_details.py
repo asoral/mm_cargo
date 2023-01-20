@@ -63,6 +63,7 @@ class BookingDetails(Document):
 						doc.append("custom_region",{
 							"location":j.location,
 							"agent_inhouse":j.agent_inhouse,
+							"item":j.item,
 							"agent_name":j.agent_name,
 							"amount":j.amount
 						})
