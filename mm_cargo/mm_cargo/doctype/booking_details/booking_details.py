@@ -110,6 +110,14 @@ class BookingDetails(Document):
 					doc.append("milestone_list",{
 						"milestone":lo
 					})
+				for add_c in self.mmcs_transport:
+					for csr in self.custom_region:
+						doc.append("items",{
+							"item_code":csr.item_name,
+							"qty":1,
+							"rate":add_c.additional_charge
+						})
+
 				doc.save(ignore_permissions=True)
 				frappe.msgprint("Quotation Created")
 			if self.shipment_type=="Consolidated":
@@ -200,6 +208,15 @@ class BookingDetails(Document):
 					doc.append("milestone_list",{
 						"milestone":lo
 					})
+
+				for add_c in self.mmcs_transport:
+					for csr in self.custom_region:
+						doc.append("items",{
+							"item_code":csr.item_name,
+							"qty":1,
+							"rate":add_c.additional_charge
+						})	
+
 				doc.save(ignore_permissions=True)
 				frappe.msgprint("Quotation Created")
 		else:
