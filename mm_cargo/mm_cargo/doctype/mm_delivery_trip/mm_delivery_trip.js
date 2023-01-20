@@ -53,6 +53,17 @@ frappe.ui.form.on('MM Delivery Trip', {
 			}
 		}
 
+		// if(!frm.doc.__islocal){
+		// 	frappe.call({
+		// 		method:"list_m",
+		// 		doc:frm.doc,
+		// 		callback:function(r){
+		// 			frm.set_df_property("milestone", "options", r.message);
+		// 		}
+		// 	})
+	
+		// }
+
 		// frappe.call({
 		// 	method:"list_m",
 		// 	doc:frm.doc,
@@ -62,6 +73,18 @@ frappe.ui.form.on('MM Delivery Trip', {
 		// })
 
 	},
+	// milestone:function(frm){
+	// 	if(!frm.doc.__islocal){
+	// 		frappe.call({
+	// 			method:"list_m",
+	// 			doc:frm.doc,
+	// 			callback:function(r){
+	// 				frm.set_df_property("milestone", "options", r.message);
+	// 			}
+	// 		})
+	
+	// 	}
+	// },
 	
 	refresh: function (frm) {
 

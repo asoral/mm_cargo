@@ -62,6 +62,7 @@ class MMDeliveryTrip(Document):
 		for i in self.delivery_stops:
 			mil = frappe.get_doc("Waybill",{"name":i.waybill})
 			for j in mil.milestone_list:
+				print("YYYYYYYYYYYYYYYYYYYYYYYYY",j.delivered)
 				m_list.append(j.milestone)
 		return m_list
 
@@ -84,8 +85,6 @@ class MMDeliveryTrip(Document):
 
 	def before_update_after_submit(self):
 
-
-		
 		for a in self.delivery_stops:
 			if a.status_milestones:
 				pass
@@ -97,11 +96,6 @@ class MMDeliveryTrip(Document):
 									"delivery_status":ml.status_milestones,
 							})
 
-		# for mil in self.milestone_list:
-		# 	if mil.milestone 
-		# 	# add_m = frappe.get_doc("Waybill",{"name":mil.waybill})
-		# 	# for add_list in add_m.milestone_list:
-				
 
 		for r in self.milestone_list:
 			if r.milestone == self.milestone:

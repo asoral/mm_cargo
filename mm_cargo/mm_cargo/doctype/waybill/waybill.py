@@ -56,7 +56,7 @@ class Waybill(Document):
 		new_comm.subject = "Waybill OTP"
 		new_comm.communication_medium = "Email"
 		new_comm.sender = outgoing
-		new_comm.recipients = doc.email_id
+		new_comm.recipients = self.delivery_contact_email
 		# new_comm.content = message
 		new_comm.content = msg
 		new_comm.communication_type	= "Communication"
