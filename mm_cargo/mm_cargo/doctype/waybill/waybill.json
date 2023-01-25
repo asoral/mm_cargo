@@ -178,7 +178,7 @@
    "depends_on": "eval:doc.delivery_to_type == 'Customer'",
    "fieldname": "delivery_customer",
    "fieldtype": "Link",
-   "label": "Customer",
+   "label": "Delivery Customer",
    "options": "Customer"
   },
   {
@@ -200,7 +200,7 @@
    "depends_on": "eval: doc.delivery_customer || doc.delivery_supplier || doc.delivery_to_type == \"Company\"",
    "fieldname": "delivery_address_name",
    "fieldtype": "Link",
-   "label": "Address",
+   "label": "Delivery Address",
    "options": "Address",
    "reqd": 1
   },
@@ -482,7 +482,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-01-25 12:06:55.829839",
+ "modified": "2023-01-25 19:30:51.674897",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Waybill",

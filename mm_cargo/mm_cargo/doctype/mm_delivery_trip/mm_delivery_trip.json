@@ -142,6 +142,7 @@
    "label": "Delivery Stops"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "delivery_stops",
    "fieldtype": "Table",
    "label": "Delivery Stop",
@@ -225,7 +226,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-01-19 16:14:13.090146",
+ "modified": "2023-01-25 19:13:29.467098",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "MM Delivery Trip",
