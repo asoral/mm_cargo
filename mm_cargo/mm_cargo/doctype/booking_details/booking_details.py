@@ -138,11 +138,11 @@ class BookingDetails(Document):
 					location.append(i.destination_point)
 					doc1=frappe.get_value("Pricing Matrix",{"source":i.origin_point,"dest":i.destination_point,"vehicle_type":i.vehicle_type},["price"])
 					price.append(flt(doc1))
-					if self.need_pickup:
-						local_rate1=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["local_rate"])
-						local_rate.append(local_rate1)
-						capacity1=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["capacity"])
-						capacity.append(capacity1)
+					# if self.need_pickup:
+					local_rate1=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["local_rate"])
+					local_rate.append(local_rate1)
+					capacity1=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["capacity"])
+					capacity.append(capacity1)
 				doc=frappe.new_doc("Quotation")
 				doc.booking_details=self.name
 				doc.quotation_to=self.party

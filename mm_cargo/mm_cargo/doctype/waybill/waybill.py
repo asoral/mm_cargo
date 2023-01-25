@@ -21,12 +21,12 @@ class Waybill(Document):
 				"milestone":i
 			})
 
-	# def before_submit(self):
-	# 	self.send_email(self)
+	def before_submit(self):
+		self.send_email()
 
-	# @frappe.whitelist()	
-	# def send_email(self):
-	def before_submit(self):	
+	@frappe.whitelist()	
+	def send_email(self):
+	# def before_submit(self):	
 		doc=frappe.get_doc("Address",self.delivery_address_name)
 		d=frappe.get_doc('User', frappe.session.user)
 		# emails = []

@@ -12,7 +12,16 @@ frappe.ui.form.on('Waybill', {
 		// 		// frm.refresh_field("delivery_milestone")
 		// 	}
 		// });
-
+		console.log("uuuuuuuuuuuuuuuuuuuuuuuuuuu",frm.doc.docstatus)
+		if (frm.doc.docstatus == 1){
+			frm.add_custom_button(__('Sent Mail'), function() {
+				frappe.call({
+					method:"send_email",
+					doc:frm.doc
+				})
+			},);
+		}
+	
 	},
 	pickup_customer: function(frm) {
 		frappe.call({
