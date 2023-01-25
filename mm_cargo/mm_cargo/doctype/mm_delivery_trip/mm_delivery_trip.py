@@ -69,6 +69,7 @@ class MMDeliveryTrip(Document):
 	
 	def before_save(self):
 		# m_list = []
+		self.set("milestone_list",[])
 		for i in self.delivery_stops:
 			mil = frappe.get_doc("Waybill",{"name":i.waybill})
 			for j in mil.milestone_list:
