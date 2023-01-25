@@ -20,8 +20,13 @@ class Waybill(Document):
 			self.append("milestone_list",{
 				"milestone":i
 			})
-		
-	def before_submit(self):
+
+	# def before_submit(self):
+	# 	self.send_email(self)
+
+	# @frappe.whitelist()	
+	# def send_email(self):
+	def before_submit(self):	
 		doc=frappe.get_doc("Address",self.delivery_address_name)
 		d=frappe.get_doc('User', frappe.session.user)
 		# emails = []
@@ -159,7 +164,7 @@ class Waybill(Document):
 		print(" outgoing", outgoing)
 
 		if not outgoing:
-			frappe.throw(" Please add Email account with Enable Outgoing and Default Outgoing")
+			frappe.msgprint(" Please add Email account with Enable Outgoing and Default Outgoing")
 
 		sender      	    = dict()
 		sender['email']     = outgoing 
