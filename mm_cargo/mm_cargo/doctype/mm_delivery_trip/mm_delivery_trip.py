@@ -84,14 +84,11 @@ class MMDeliveryTrip(Document):
 	# 				if k.waybill == m.waybill:
 	# 					frappe.throw("Waybill is already delivered")
 	def before_save(self):
-		# m_list = []
-		wbs=frappe.get_all("MM Delivery Trip")
-		print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTttt",wbs)
+		wbs=frappe.get_all("MM Delivery Trip",{"docstatus":1})
 		for w in wbs:
 			wbl = frappe.get_doc("MM Delivery Trip",{"name":w.name})
 			for k in wbl.delivery_stops:
 				for m in self.delivery_stops:
-				# print("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJjj",self.waybill)
 					if k.waybill == m.waybill:
 						frappe.throw("Waybill is already delivered")
 

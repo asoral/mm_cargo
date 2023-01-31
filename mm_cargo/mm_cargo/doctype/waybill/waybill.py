@@ -79,7 +79,6 @@ class Waybill(Document):
 	def address(self):
 		doc = frappe.get_all("Dynamic Link",{"link_doctype":"Customer","link_name":self.pickup_customer,"parenttype":"Address"},["parent"])
 		c_doc = frappe.get_all("Dynamic Link",{"link_doctype":"Customer","link_name":self.pickup_customer,"parenttype":"Contact"},["parent"])
-		print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",c_doc)
 		list_adr=[]
 		list_con=[]
 		for c_ads in doc:

@@ -4,7 +4,12 @@
 frappe.ui.form.on('MM Delivery Trip', {
 	// Copyright (c) 2017, Frappe Technologies Pvt. Ltd. and contributors
 // For license information, please see license.txt
+	// refresh:function(frm){
+	// 	if(frm.doc.docstatus==1){
+	// 		frm.set_df_property("status_milestones","hidden",0);
+	// 	}
 
+	// },
 
 	setup: function (frm) {
 		frm.set_indicator_formatter('customer', (stop) => (stop.visited) ? "green" : "orange");
