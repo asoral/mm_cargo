@@ -53,6 +53,16 @@ frappe.ui.form.on('MM Delivery Trip', {
 			}
 		}
 
+
+
+		frm.set_query("template", function () {
+			return {
+				filters: {
+					"docstatus":["=",1]
+				}
+			};
+		});
+
 		// if(!frm.doc.__islocal){
 		// 	frappe.call({
 		// 		method:"list_m",
@@ -133,6 +143,31 @@ frappe.ui.form.on('MM Delivery Trip', {
 				frm.trigger('notify_customers');
 			});
 		}
+
+		if(frm.doc.inspection_required == 1) {
+			  frm.add_custom_button(__('Create Inspection'), function(){
+				frappe.db.get_doc('Inspection Template',frm.doc.template).then(tmp => {
+					console.log("**************************",)
+					if(tmp.item_inspection_parameter){
+						console.log('AAAAAAAAAAAAAA')
+						frappe.new_doc('Inspection', {"driver": frm.doc.driver,"vehicle":frm.doc.vehicle}).then(function(r){
+						$.each(tmp.item_inspection_parameter,function(i,v){
+							cur_frm.add_child("parameter",
+							{
+								"parameter":v.parameter,
+								
+							})
+							cur_frm.refresh_field("parameter")
+                
+							console.log('vvvvvvvvvvvvvvvvvvvv',v.parameter)
+						})
+					}, __("Create"));
+				}
+				
+				})
+			})
+				
+		  }
 
 		// if (frm.doc.docstatus === 0) {
 		// 	frm.add_custom_button(__('Waybill'), () => {

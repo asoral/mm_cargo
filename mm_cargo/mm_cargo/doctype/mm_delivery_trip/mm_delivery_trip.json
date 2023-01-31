@@ -240,8 +240,14 @@
   }
  ],
  "is_submittable": 1,
- "links": [],
- "modified": "2023-01-31 08:56:12.029866",
+ "links": [
+  {
+   "group": "Inspection",
+   "link_doctype": "Inspection",
+   "link_fieldname": "reference_name"
+  }
+ ],
+ "modified": "2023-01-31 16:01:51.732996",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "MM Delivery Trip",

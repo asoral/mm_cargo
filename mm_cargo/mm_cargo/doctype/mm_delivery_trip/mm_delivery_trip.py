@@ -27,6 +27,13 @@ class MMDeliveryTrip(Document):
 
 	def validate(self):
 		self.validate_stop_addresses()
+		doc=frappe.db.get_value('Inspection',{"reference_name":self.name},["name"])
+		if doc and self.inspection_required:
+			frappe.throw("Inspection Not created")
+		doc1=frappe.db.get_value('Inspection',{"reference_name":self.name,"docstatus":1},["name"])
+
+		if doc and self.inspection_required and not doc1:
+			frappe.throw("Inspection created but Not submitted")
 
 	def on_submit(self):
 		self.update_status()

@@ -8,18 +8,21 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "date",
   "company",
+  "driver",
   "column_break_3",
   "status",
   "reference_name",
+  "vehicle",
   "section_break_6",
   "parameter",
-  "amended_from",
-  "naming_series"
+  "amended_from"
  ],
  "fields": [
   {
+   "default": "Today",
    "fieldname": "date",
    "fieldtype": "Date",
    "in_list_view": 1,
@@ -46,8 +49,7 @@
    "fieldname": "parameter",
    "fieldtype": "Table",
    "label": "Parameter",
-   "options": "Inspection Criteria",
-   "reqd": 1
+   "options": "Inspection Criteria"
   },
   {
    "fieldname": "amended_from",
@@ -78,12 +80,22 @@
   {
    "fieldname": "section_break_6",
    "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "driver",
+   "fieldtype": "Data",
+   "label": "Driver"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Data",
+   "label": "Vehicle"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-01-31 08:01:38.478615",
+ "modified": "2023-01-31 15:56:04.591444",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Inspection",
