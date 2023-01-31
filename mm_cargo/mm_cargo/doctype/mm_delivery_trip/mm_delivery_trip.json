@@ -12,6 +12,8 @@
   "company",
   "column_break_2",
   "email_notification_sent",
+  "inspection_required",
+  "template",
   "section_break_3",
   "driver",
   "driver_name",
@@ -222,11 +224,24 @@
    "fieldname": "milestone",
    "fieldtype": "Select",
    "label": "Milestone"
+  },
+  {
+   "default": "0",
+   "fieldname": "inspection_required",
+   "fieldtype": "Check",
+   "label": "Inspection Required"
+  },
+  {
+   "depends_on": "inspection_required",
+   "fieldname": "template",
+   "fieldtype": "Link",
+   "label": "Template",
+   "options": "Inspection Template"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-01-25 19:13:29.467098",
+ "modified": "2023-01-31 08:56:12.029866",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "MM Delivery Trip",

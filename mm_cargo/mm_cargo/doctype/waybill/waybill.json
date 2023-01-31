@@ -454,6 +454,7 @@
    "label": "Verification Code"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "milestone_list",
    "fieldtype": "Table",
    "label": "Milestone List",
