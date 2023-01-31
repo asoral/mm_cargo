@@ -78,12 +78,13 @@ class MMDeliveryTrip(Document):
 	# 					frappe.throw("Waybill is already delivered")
 	def before_save(self):
 		wbs=frappe.get_all("MM Delivery Trip")
-		for w in wbs:
-			wbl = frappe.get_doc("MM Delivery Trip",{"name":w.name})
-			for k in wbl.delivery_stops:
-				for m in self.delivery_stops:
-					if k.waybill == m.waybill:
-						frappe.throw("Waybill is already delivered")
+		if doc.docstatus = 1
+			for w in wbs:
+				wbl = frappe.get_doc("MM Delivery Trip",{"name":w.name})
+				for k in wbl.delivery_stops:
+					for m in self.delivery_stops:
+						if k.waybill == m.waybill:
+							frappe.throw("Waybill is already delivered")
 
 		self.set("milestone_list",[])
 		for i in self.delivery_stops:
