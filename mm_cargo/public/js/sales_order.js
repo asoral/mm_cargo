@@ -3,6 +3,10 @@ frappe.ui.form.on("Sales Order", {
 
         frm.add_custom_button(__('Waybill'), function() {
                 frappe.new_doc('Waybill', {"delivery_customer": frm.doc.customer,"sales_order":frm.doc.name}).then(function(r){
+                    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&7",frm.doc.contact_person)
+                    cur_frm.doc.delivery_address_name = frm.doc.customer_address
+                    cur_frm.doc.delivery_contact_name = frm.doc.contact_person
+                    console,log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",cur_frm.doc.delivery_contact_name)
                     $.each(frm.doc.milestone_list,function(i,v){
                     cur_frm.add_child("milestone_list",
                     {
@@ -10,6 +14,7 @@ frappe.ui.form.on("Sales Order", {
                         "timestamp":v.timestamp
                     })
                     cur_frm.refresh_field("milestone_list")
+                    cur_frm.refresh_field("delivery_address_name")
                 })
             })
         }, __('Create'));

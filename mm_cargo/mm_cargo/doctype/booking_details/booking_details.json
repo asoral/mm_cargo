@@ -36,7 +36,15 @@
   "special_packaging_description",
   "permits_required",
   "permits_details",
-  "amended_from"
+  "amended_from",
+  "dummy_entry_calculations_section",
+  "supplier_invoice_no",
+  "invoice_value_",
+  "column_break_34",
+  "conversion_currency",
+  "exchange_rate",
+  "section_break_37",
+  "charges_type"
  ],
  "fields": [
   {
@@ -228,6 +236,47 @@
    "fieldname": "packaging_charges1",
    "fieldtype": "Currency",
    "label": "Packaging Charges"
+  },
+  {
+   "fieldname": "dummy_entry_calculations_section",
+   "fieldtype": "Tab Break",
+   "label": "Dummy Entry Calculations"
+  },
+  {
+   "fieldname": "supplier_invoice_no",
+   "fieldtype": "Data",
+   "label": "Supplier Invoice No"
+  },
+  {
+   "fieldname": "invoice_value_",
+   "fieldtype": "Currency",
+   "label": "Invoice Value"
+  },
+  {
+   "fieldname": "charges_type",
+   "fieldtype": "Table",
+   "label": "Charges Type",
+   "options": "Charges Type Table"
+  },
+  {
+   "fieldname": "column_break_34",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_37",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "conversion_currency",
+   "fieldtype": "Link",
+   "label": "Conversion Currency ",
+   "options": "Currency"
+  },
+  {
+   "fieldname": "exchange_rate",
+   "fieldtype": "Float",
+   "hidden": 1,
+   "label": "Exchange Rate"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -238,7 +287,7 @@
    "link_fieldname": "booking_details"
   }
  ],
- "modified": "2023-01-25 13:16:58.042604",
+ "modified": "2023-01-31 16:55:02.633103",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Booking Details",

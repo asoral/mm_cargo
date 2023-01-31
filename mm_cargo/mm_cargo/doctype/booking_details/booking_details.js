@@ -10,7 +10,65 @@ frappe.ui.form.on('Booking Details', {
 				}
 			}
 		});
+		
+		frappe.call({
+			method:"c_charge",
+			doc:frm.doc,
+			callback:function(r){
+				console.log("YYYYYYYYYYYYYYYYYYYYYYYy",r.message)
+				frm.set_value("charges_type",r.message)
+				frm.refresh_fields("charges_type")
+			}
+		})
+		
+		// cur_frm.fields_dict['charges_type'].grid.get_field('exchange_rate').get_query = function(doc, cdt, cdn) {
+		// 	return {
+				
+		// 	}
+		// }
+
 	},
+
+
+	conversion_currency:function(frm){
+		console.log("HHHHHHHHHHHHHHHHHHHHHhh0",frm.doc.conversion_currency)
+		let base_currency = frappe.defaults.get_global_default('currency');
+		if (base_currency != frm.doc.conversion_currency) {
+			frappe.call({
+				method: "erpnext.setup.utils.get_exchange_rate",
+				args: {
+					  from_currency: frm.doc.conversion_currency,
+					  to_currency: base_currency
+				},
+				callback: function(r) {
+					frm.doc.exchange_rate = r.message
+				}
+		  });
+		}
+		else{
+			frappe.call({
+				method: "erpnext.setup.utils.get_exchange_rate",
+				args: {
+					  from_currency: frm.doc.conversion_currency,
+					  to_currency: base_currency
+				},
+				callback: function(r) {
+					frm.doc.exchange_rate = r.message
+				}
+		  });
+		}
+	   
+	},
+	
+	// before_save:function(frm){
+		// frappe.call({
+		// 	method:"c_charge",
+		// 	doc:frm.doc,
+		// 	callback:function(r){
+		// 		console.log("YYYYYYYYYYYYYYYYYYYYYYYYYYYYY",r.message)
+		// 	}
+		// })
+	// },
 	party_name:function(frm){
 				frappe.call({
 				method:"address_",
@@ -40,7 +98,20 @@ frappe.ui.form.on('Booking Details', {
 		// 		}
 		// 	}
 		// }
+
+
 		
+		// frappe.call({
+		// 	method:"c_charge",
+		// 	doc:frm.doc,
+		// 	callback:function(r){
+		// 		console.log("YYYYYYYYYYYYYYYYYYYYYYYy",r.message)
+		// 		frm.set_value("charges_type",r.message)
+		// 		frm.refresh_fields("charges_type")
+		// 	}
+		// })
+
+
 		if(frm.doc.docstatus==1){
 			frm.add_custom_button(__('Create Quotation'), function() {
 				frappe.call({
@@ -155,26 +226,36 @@ frappe.ui.form.on('Booking Details', {
 
 });
 
-// frappe.ui.form.on('Custom Borders',{
-
-// 	location:function(frm,cdt,cdn){
-// 		let child = locals[cdt][cdn];
-// 		frappe.call({
-// 			method:"item_list",
-// 			doc:frm.doc,
-// 			callback:function(r){
-// 				frm.fields_dict.custom_region.grid.get_field('agent_name').get_query = function(frm,cdt,cdn) {
-// 					let child =locals[cdt][cdn]
-// 					return {
-// 						filters:{
-// 							"partner_type":["=",child.agent_inhouse]
-// 						}
-// 					}
-// 				}
-// 			}
-// 		})
-// 	}
-
+// frappe.ui.form.on('Charges Type Table',{
+	// conversion_currency:function(frm,cdt,cdn){
+	// 	let child = locals[cdt][cdn]
+	// 	let base_currency = frappe.defaults.get_global_default('currency');
+	// 	if (base_currency != child.conversion_currency) {
+	// 		frappe.call({
+	// 			method: "erpnext.setup.utils.get_exchange_rate",
+	// 			args: {
+	// 				  from_currency: child.conversion_currency,
+	// 				  to_currency: base_currency
+	// 			},
+	// 			callback: function(r) {
+	// 				child.exchange_rate = r.message
+	// 			}
+	// 	  });
+	// 	}
+	// 	else{
+	// 		frappe.call({
+	// 			method: "erpnext.setup.utils.get_exchange_rate",
+	// 			args: {
+	// 				  from_currency: child.conversion_currency,
+	// 				  to_currency: base_currency
+	// 			},
+	// 			callback: function(r) {
+	// 				child.exchange_rate = r.message
+	// 			}
+	// 	  });
+	// 	}
+	   
+	// }
 // });
 
 
