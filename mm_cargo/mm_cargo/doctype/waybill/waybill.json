@@ -454,6 +454,7 @@
    "label": "Verification Code"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "milestone_list",
    "fieldtype": "Table",
    "label": "Milestone List",
@@ -482,7 +483,7 @@
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-01-25 12:06:55.829839",
+ "modified": "2023-01-25 15:21:15.773623",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Waybill",
