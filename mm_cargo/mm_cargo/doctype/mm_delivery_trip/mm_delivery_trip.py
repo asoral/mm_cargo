@@ -27,13 +27,16 @@ class MMDeliveryTrip(Document):
 
 	def validate(self):
 		self.validate_stop_addresses()
-		doc=frappe.db.get_value('Inspection',{"reference_name":self.name},["name"])
-		if doc and self.inspection_required:
-			frappe.throw("Inspection Not created")
-		doc1=frappe.db.get_value('Inspection',{"reference_name":self.name,"docstatus":1},["name"])
 
-		if doc and self.inspection_required and not doc1:
-			frappe.throw("Inspection created but Not submitted")
+		
+	@frappe.whitelist()
+	def inspection_status1(self):
+		doc2 = frappe.db.get_value('Inspection',{"reference_name":self.name},['docstatus'])
+		if doc2 == 1:
+			self.db_set('inspection_status',"Submitted")
+		if doc2 == 0:
+			self.db_set('inspection_status',"Draft")
+
 
 	def on_submit(self):
 		self.update_status()
@@ -73,16 +76,20 @@ class MMDeliveryTrip(Document):
 				m_list.append(j.milestone)
 		return m_list
 
-	# def before_submit(self):
-	# 	wbs=frappe.get_all("MM Delivery Trip")
-	# 	print("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTttt",wbs)
-	# 	for w in wbs:
-	# 		wbl = frappe.get_doc("MM Delivery Trip",{"name":w.name})
-	# 		for k in wbl.delivery_stops:
-	# 			for m in self.delivery_stops:
-	# 			# print("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJjj",self.waybill)
-	# 				if k.waybill == m.waybill:
-	# 					frappe.throw("Waybill is already delivered")
+	def before_submit(self):
+		doc=frappe.db.get_value('Inspection',{"reference_name":self.name},["name"])
+		if not doc and self.inspection_required:
+			frappe.throw("Inspection Not created")
+
+		doc1=frappe.db.get_value('Inspection',{"reference_name":self.name,"docstatus":1},["name"])
+		if doc and self.inspection_required and not doc1:
+			frappe.throw("Inspection created but Not submitted")
+
+		# doc2 = frappe.db.get_value('Inspection',{"reference_name":self.name},['docstatus'])
+		# print('doc2222222222222222222222',doc2)
+		# self.db_set('inspection_status',doc2)
+
+
 	def before_save(self):
 		wbs=frappe.get_all("MM Delivery Trip",{"docstatus":1})
 		for w in wbs:

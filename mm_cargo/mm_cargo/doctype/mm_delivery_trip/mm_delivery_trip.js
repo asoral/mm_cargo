@@ -4,12 +4,7 @@
 frappe.ui.form.on('MM Delivery Trip', {
 	// Copyright (c) 2017, Frappe Technologies Pvt. Ltd. and contributors
 // For license information, please see license.txt
-	// refresh:function(frm){
-	// 	if(frm.doc.docstatus==1){
-	// 		frm.set_df_property("status_milestones","hidden",0);
-	// 	}
 
-	// },
 
 	setup: function (frm) {
 		frm.set_indicator_formatter('customer', (stop) => (stop.visited) ? "green" : "orange");
@@ -155,7 +150,7 @@ frappe.ui.form.on('MM Delivery Trip', {
 					console.log("**************************",)
 					if(tmp.item_inspection_parameter){
 						console.log('AAAAAAAAAAAAAA')
-						frappe.new_doc('Inspection', {"driver": frm.doc.driver,"vehicle":frm.doc.vehicle}).then(function(r){
+						frappe.new_doc('Inspection', {"driver": frm.doc.driver,"vehicle":frm.doc.vehicle,"reference_name":frm.doc.name}).then(function(r){
 						$.each(tmp.item_inspection_parameter,function(i,v){
 							cur_frm.add_child("parameter",
 							{
@@ -171,7 +166,10 @@ frappe.ui.form.on('MM Delivery Trip', {
 				
 				})
 			})
-				
+			frappe.call({
+				method :"inspection_status1",
+				doc :frm.doc,
+			})	
 		  }
 
 		// if (frm.doc.docstatus === 0) {
