@@ -16,7 +16,11 @@ frappe.ui.form.on('Booking Details', {
 			doc:frm.doc,
 			callback:function(r){
 				console.log("YYYYYYYYYYYYYYYYYYYYYYYy",r.message)
-				frm.set_value("charges_type",r.message)
+				// frm.set_value("charges_type",r.message)
+				var a=frm.add_child("charges_type")
+				a.charges_type=r.message.charges_type
+				a.abbr=r.message.abbr
+				a.percentage=r.message.percentage
 				frm.refresh_fields("charges_type")
 			}
 		})
@@ -26,6 +30,19 @@ frappe.ui.form.on('Booking Details', {
 				
 		// 	}
 		// }
+		frappe.call({
+			method:"item_list",
+			doc:frm.doc,
+			callback:function(r){
+				frm.set_query('item', 'custom_region', function(doc, cdt, cdn) {
+					return {
+						filters:{
+							"name":["in",r.message]
+						}
+					}
+				})
+			}
+		})
 
 	},
 
@@ -164,19 +181,6 @@ frappe.ui.form.on('Booking Details', {
 			}
 		}
 
-		frappe.call({
-			method:"item_list",
-			doc:frm.doc,
-			callback:function(r){
-				frm.set_query('item', 'custom_region', function(doc, cdt, cdn) {
-					return {
-						filters:{
-							"name":["in",r.message]
-						}
-					}
-				})
-			}
-		})
 		
 	},
 	// pickup_address(frm){
