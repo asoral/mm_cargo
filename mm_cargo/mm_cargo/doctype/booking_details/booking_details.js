@@ -168,14 +168,13 @@ frappe.ui.form.on('Booking Details', {
 			method:"item_list",
 			doc:frm.doc,
 			callback:function(r){
-				frm.fields_dict.custom_region.grid.get_field('item').get_query = function(frm,cdt,cdn) {
-					let child =locals[cdt][cdn]
+				frm.set_query('item', 'custom_region', function(doc, cdt, cdn) {
 					return {
 						filters:{
 							"name":["in",r.message]
 						}
 					}
-				}
+				})
 			}
 		})
 		

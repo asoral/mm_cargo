@@ -261,6 +261,7 @@ class BookingDetails(Document):
 
 	@frappe.whitelist()
 	def c_charge(self):
+		self.charges_type=[]
 		cvr = []
 		ch_ty = frappe.get_all("Charges Type")
 		for k in ch_ty:
@@ -313,7 +314,6 @@ class BookingDetails(Document):
 				k.amount = self.invoice_value_
 			abbr_amount[k.abbr]=k.amount
 			abbr_per[k.abbr]=k.percentage
-		print("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIi",abbr_amount)
 		a.append(abbr_amount)
 		# print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoo",abbr_per["fob"])
 		for k in self.charges_type:
@@ -326,9 +326,8 @@ class BookingDetails(Document):
 	def item_list(self):
 		item_list = []
 		t_setting = frappe.get_doc("Transport Setting")	
-		for i in self.custom_region:
-			itm = frappe.get_doc("Item",{'item_group':t_setting.item_group})	
-			item_list.append(itm.name)
+		itm = frappe.get_doc("Item",{'item_group':t_setting.item_group})	
+		item_list.append(itm.name)
 		return item_list
 
 	@frappe.whitelist()
