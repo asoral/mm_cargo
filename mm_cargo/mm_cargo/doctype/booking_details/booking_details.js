@@ -17,11 +17,13 @@ frappe.ui.form.on('Booking Details', {
 			callback:function(r){
 				console.log("YYYYYYYYYYYYYYYYYYYYYYYy",r.message)
 				// frm.set_value("charges_type",r.message)
-				var a=frm.add_child("charges_type")
-				a.charges_type=r.message.charges_type
-				a.abbr=r.message.abbr
-				a.percentage=r.message.percentage
-				frm.refresh_fields("charges_type")
+				$.each(r.message,function(i,v){
+					var a=frm.add_child("charges_type")
+					a.charges_type=v.charges_type
+					a.abbr=v.abbr
+					a.percentage=v.percentage
+					frm.refresh_fields("charges_type")
+				})
 			}
 		})
 		
