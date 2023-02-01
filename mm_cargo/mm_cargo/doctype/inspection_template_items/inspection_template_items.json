@@ -1,7 +1,8 @@
 {
  "actions": [],
  "autoname": "autoincrement",
- "creation": "2023-01-30 15:06:26.431098",
+ "creation": "2023-02-01 15:33:25.632850",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -24,14 +25,14 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "In",
-   "options": "\nYes\nNo"
+   "options": "Yes\nNo"
   },
   {
    "fieldname": "out",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Out",
-   "options": "\nYes\nNo"
+   "options": "Yes\nNo"
   },
   {
    "fieldname": "comments",
@@ -43,10 +44,10 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-02-01 15:32:40.623942",
+ "modified": "2023-02-01 15:33:25.632850",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
- "name": "Inspection Criteria",
+ "name": "Inspection Template Items",
  "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [],

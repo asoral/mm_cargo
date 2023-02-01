@@ -50,7 +50,7 @@
    "fieldname": "parameter",
    "fieldtype": "Table",
    "label": "Parameter",
-   "options": "Inspection Criteria"
+   "options": "Inspection Template Items"
   },
   {
    "fieldname": "amended_from",
@@ -98,7 +98,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-02-01 06:55:25.727096",
+ "modified": "2023-02-01 15:34:48.255538",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Inspection",
