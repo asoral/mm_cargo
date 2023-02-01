@@ -300,7 +300,6 @@ class BookingDetails(Document):
 			"float": float,
 			"long": int,
 			"round": round,
-
 		}
 		a=[]
 		abbr_amount={}
@@ -308,10 +307,6 @@ class BookingDetails(Document):
 		for k in self.charges_type:
 			k.conversion_currency=self.conversion_currency
 			k.exchange_rate=self.exchange_rate
-			if k.abbr == "roe":
-				k.amount = self.exchange_rate
-			if k.abbr == "fob":
-				k.amount = self.invoice_value_
 			abbr_amount[k.abbr]=k.amount
 			abbr_per[k.abbr]=k.percentage
 		a.append(abbr_amount)
