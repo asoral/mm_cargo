@@ -10,22 +10,23 @@ frappe.ui.form.on('Booking Details', {
 				}
 			}
 		});
-		
-		frappe.call({
-			method:"c_charge",
-			doc:frm.doc,
-			callback:function(r){
-				console.log("YYYYYYYYYYYYYYYYYYYYYYYy",r.message)
-				// frm.set_value("charges_type",r.message)
-				$.each(r.message,function(i,v){
-					var a=frm.add_child("charges_type")
-					a.charges_type=v.charges_type
-					a.abbr=v.abbr
-					a.percentage=v.percentage
-					frm.refresh_fields("charges_type")
-				})
-			}
-		})
+		// frm.clear_table("charges_type")
+		// frappe.call({
+		// 	method:"c_charge",
+		// 	doc:frm.doc,
+		// 	callback:function(r){
+		// 		console.log("YYYYYYYYYYYYYYYYYYYYYYYy",r.message)
+		// 		// frm.set_value("charges_type",r.message)
+		// 		$.each(r.message,function(i,v){
+		// 			var a=frm.add_child("charges_type")
+		// 			a.charges_type=v.charges_type
+		// 			a.abbr=v.abbr
+		// 			a.percentage=v.percentage
+		// 		})
+		// 		frm.refresh_fields("charges_type")
+
+		// 	}
+		// })
 		
 		// cur_frm.fields_dict['charges_type'].grid.get_field('exchange_rate').get_query = function(doc, cdt, cdn) {
 		// 	return {
@@ -47,7 +48,13 @@ frappe.ui.form.on('Booking Details', {
 		})
 
 	},
-
+	onload: (frm) => {
+		if (frm.doc.charges_type == undefined) frm.call('c_charge');
+	},
+	invoice_value_:function(frm){
+		frm.set_value("fob",frm.doc.invoice_value_)
+		frm.refresh_field("fob")
+	},
 
 	conversion_currency:function(frm){
 		console.log("HHHHHHHHHHHHHHHHHHHHHhh0",frm.doc.conversion_currency)
@@ -60,7 +67,8 @@ frappe.ui.form.on('Booking Details', {
 					  to_currency: base_currency
 				},
 				callback: function(r) {
-					frm.doc.exchange_rate = r.message
+					frm.set_value("er",r.message)
+					frm.refresh_field("er")
 				}
 		  });
 		}
@@ -72,7 +80,9 @@ frappe.ui.form.on('Booking Details', {
 					  to_currency: base_currency
 				},
 				callback: function(r) {
-					frm.doc.exchange_rate = r.message
+					frm.set_value("er",r.message)
+					frm.refresh_field("er")
+
 				}
 		  });
 		}

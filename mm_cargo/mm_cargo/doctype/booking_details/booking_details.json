@@ -40,9 +40,12 @@
   "dummy_entry_calculations_section",
   "supplier_invoice_no",
   "invoice_value_",
+  "tariff_code",
   "column_break_34",
+  "fob",
+  "fa",
   "conversion_currency",
-  "exchange_rate",
+  "er",
   "section_break_37",
   "charges_type"
  ],
@@ -267,16 +270,34 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "conversion_currency",
-   "fieldtype": "Link",
-   "label": "Conversion Currency ",
-   "options": "Currency"
+   "fieldname": "fob",
+   "fieldtype": "Currency",
+   "label": "FOB",
+   "options": "Company:company:default_currency",
+   "read_only": 1
   },
   {
-   "fieldname": "exchange_rate",
+   "fieldname": "tariff_code",
+   "fieldtype": "Data",
+   "label": "Tariff Code"
+  },
+  {
+   "fieldname": "fa",
+   "fieldtype": "Currency",
+   "label": "Freight Amount",
+   "options": "Company:company:default_currency"
+  },
+  {
+   "fieldname": "er",
    "fieldtype": "Float",
-   "hidden": 1,
-   "label": "Exchange Rate"
+   "label": "R .O .E",
+   "read_only": 1
+  },
+  {
+   "fieldname": "conversion_currency",
+   "fieldtype": "Link",
+   "label": "Importing Country Currency",
+   "options": "Currency"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -287,7 +308,7 @@
    "link_fieldname": "booking_details"
   }
  ],
- "modified": "2023-01-31 16:55:02.633103",
+ "modified": "2023-02-02 13:45:21.079679",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Booking Details",

@@ -261,18 +261,19 @@ class BookingDetails(Document):
 
 	@frappe.whitelist()
 	def c_charge(self):
-		self.charges_type=[]
-		cvr = []
-		ch_ty = frappe.get_all("Charges Type")
+		ch_ty = frappe.db.sql("""select name from `tabCharges Type` where docstatus=0 and active=1 order by id asc """,as_dict=1)
+		print(ch_ty)
+		# frappe.db.get_list("Charges Type",filters={"docstatus":0},fields=["*"],'index asc')
 		for k in ch_ty:
 			i = frappe.get_doc("Charges Type",{"name":k.name})
-			cvr.append({
+			self.append("charges_type",{
 				"charges_type":k.name,
 				"abbr":i.abbr,
 				"percentage":i.percentage,
+				"formula":i.formula
 			})
 		
-		return cvr 
+		# return cvr 
 	
 
 	def before_save(self):
@@ -306,15 +307,18 @@ class BookingDetails(Document):
 		abbr_per={}
 		for k in self.charges_type:
 			k.conversion_currency=self.conversion_currency
-			k.exchange_rate=self.exchange_rate
+			# k.exchange_rate=self.exchange_rate
 			abbr_amount[k.abbr]=flt(k.amount)
 			abbr_per[k.abbr]=k.percentage
+		abbr_amount.update(self.as_dict())
 		a.append(abbr_amount)
-		# print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoo",abbr_per["fob"])
-		for k in self.charges_type:
-			if k.formula:
-				v=flt(frappe.safe_eval(k.formula, self.whitelisted_globals,abbr_amount))
-				k.amount=v
+		print("&&&&&&&&&&&&&&&&",abbr_amount)
+		for c in self.charges_type:
+			print(c.formula,c.idx)
+			if c.formula:
+				v=frappe.safe_eval(c.formula, self.whitelisted_globals,abbr_amount)
+				c.amount=flt(v)
+				abbr_amount.update({str(c.abbr):c.amount})
 				
 
 	@frappe.whitelist()
