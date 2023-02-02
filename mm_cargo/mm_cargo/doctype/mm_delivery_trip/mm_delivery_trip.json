@@ -227,9 +227,11 @@
    "label": "Milestone"
   },
   {
+   "depends_on": "inspection_required",
    "fieldname": "inspection_status",
    "fieldtype": "Data",
-   "label": "Inspection Status"
+   "label": "Inspection Status",
+   "read_only": 1
   },
   {
    "default": "0",
@@ -253,7 +255,7 @@
    "link_fieldname": "reference_name"
   }
  ],
- "modified": "2023-02-01 11:30:48.040042",
+ "modified": "2023-02-01 15:36:30.725821",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "MM Delivery Trip",
