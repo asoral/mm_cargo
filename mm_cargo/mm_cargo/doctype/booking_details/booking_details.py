@@ -307,7 +307,7 @@ class BookingDetails(Document):
 		for k in self.charges_type:
 			k.conversion_currency=self.conversion_currency
 			k.exchange_rate=self.exchange_rate
-			abbr_amount[k.abbr]=k.amount
+			abbr_amount[k.abbr]=flt(k.amount)
 			abbr_per[k.abbr]=k.percentage
 		a.append(abbr_amount)
 		# print("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOoo",abbr_per["fob"])
