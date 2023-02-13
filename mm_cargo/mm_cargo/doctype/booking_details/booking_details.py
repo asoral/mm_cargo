@@ -325,8 +325,9 @@ class BookingDetails(Document):
 	def item_list(self):
 		item_list = []
 		t_setting = frappe.get_doc("Transport Setting")	
-		itm = frappe.get_doc("Item",{'item_group':t_setting.item_group})	
-		item_list.append(itm.name)
+		itm = frappe.db.get_all("Item",{'item_group':t_setting.item_group},["name"])
+		for j in itm:
+			item_list.append(j.name)
 		return item_list
 
 	@frappe.whitelist()
