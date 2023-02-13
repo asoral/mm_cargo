@@ -208,11 +208,11 @@ class BookingDetails(Document):
 							"agent_name":j.agent_name,
 							"amount":j.amount
 						})
-					doc.append("items",{
-						"item_code":transport.cc,
-						"qty":1,
-						"rate":sum(cc)
-					})
+						doc.append("items",{
+							"item_code":j.item_name,
+							"qty":1,
+							"rate":j.amount
+						})
 				# for kl in self.booking_details:
 				# 	doc.append({
 				# 		"":"",
@@ -246,13 +246,8 @@ class BookingDetails(Document):
 						"milestone":lo
 					})
 
-				for add_c in self.mmcs_transport:
-					for csr in self.custom_region:
-						doc.append("items",{
-							"item_code":csr.item_name,
-							"qty":1,
-							"rate":add_c.additional_charge
-						})	
+				# for add_c in self.mmcs_transport:
+				
 
 				doc.save(ignore_permissions=True)
 				frappe.msgprint("Quotation Created")
