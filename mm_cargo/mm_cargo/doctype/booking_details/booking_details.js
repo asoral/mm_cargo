@@ -163,15 +163,15 @@ frappe.ui.form.on('Booking Details', {
 			}
 		}
 
-		frm.fields_dict.custom_region.grid.get_field("location").get_query = function(frm,cdt,cdn){
-			let child =locals[cdt][cdn]
-			return {
-				filters:{
-					"import" : 0,
-					"export" : 0
-			}
-			}
-		}
+		// frm.fields_dict.custom_region.grid.get_field("location").get_query = function(frm,cdt,cdn){
+		// 	let child =locals[cdt][cdn]
+		// 	return {
+		// 		filters:{
+		// 			"import" : 0,
+		// 			"export" : 0
+		// 	}
+		// 	}
+		// }
 
 		
 	},
