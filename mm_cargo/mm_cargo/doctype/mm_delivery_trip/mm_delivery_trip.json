@@ -24,11 +24,14 @@
   "uom",
   "column_break_4",
   "vehicle",
+  "vehicle_type",
+  "load_capacity",
   "departure_time",
   "status_milestones",
   "employee",
   "delivery_service_stops",
   "delivery_stops",
+  "total_weight",
   "milestone",
   "milestone_list",
   "calculate_arrival_time",
@@ -245,6 +248,27 @@
    "fieldtype": "Link",
    "label": "Template",
    "options": "Inspection Template"
+  },
+  {
+   "fetch_from": "vehicle.vehicle_type",
+   "fieldname": "vehicle_type",
+   "fieldtype": "Link",
+   "label": "Vehicle Type",
+   "options": "Vehicle Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "vehicle_type.capacity",
+   "fieldname": "load_capacity",
+   "fieldtype": "Float",
+   "label": "Load Capacity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_weight",
+   "fieldtype": "Float",
+   "label": "Total Weight",
+   "read_only": 1
   }
  ],
  "is_submittable": 1,
@@ -255,7 +279,7 @@
    "link_fieldname": "reference_name"
   }
  ],
- "modified": "2023-02-01 15:36:30.725821",
+ "modified": "2023-02-14 14:00:17.999951",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "MM Delivery Trip",

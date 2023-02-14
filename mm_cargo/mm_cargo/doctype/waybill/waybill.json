@@ -66,6 +66,7 @@
   "carrier_service",
   "tracking_status",
   "tracking_status_info",
+  "booking_details",
   "amended_from"
  ],
  "fields": [
@@ -479,11 +480,19 @@
    "fieldtype": "Select",
    "label": "Series",
    "options": "WB-.############"
+  },
+  {
+   "fetch_from": "sales_order.booking_details",
+   "fieldname": "booking_details",
+   "fieldtype": "Link",
+   "label": "Booking Details",
+   "options": "Booking Details",
+   "read_only": 1
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-01-25 19:30:51.674897",
+ "modified": "2023-02-14 14:52:00.743985",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Waybill",

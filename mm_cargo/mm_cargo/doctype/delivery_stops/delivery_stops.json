@@ -29,7 +29,8 @@
   "uom",
   "lng",
   "more_information_section",
-  "details"
+  "details",
+  "total_weight"
  ],
  "fields": [
   {
@@ -193,11 +194,17 @@
    "in_list_view": 1,
    "label": "Status/Milestones",
    "options": "\nWith Supplier-(Not collected/Delivered)\nMMCS Warehouse\nPre Dispatch documentation\nLoaded for disptach\nIn Transit-Pre Clearance\nCustoms Clearance Process\nIn Transit-Post Clearance\nDelivered\nCancelled/Withdrawn"
+  },
+  {
+   "fieldname": "total_weight",
+   "fieldtype": "Float",
+   "label": "Total Weight",
+   "read_only": 1
   }
  ],
  "istable": 1,
  "links": [],
- "modified": "2023-01-25 19:31:08.732536",
+ "modified": "2023-02-14 13:56:13.946154",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Delivery Stops",

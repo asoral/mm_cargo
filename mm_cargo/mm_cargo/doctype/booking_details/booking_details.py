@@ -35,7 +35,7 @@ class BookingDetails(Document):
 					location.append(i.origin_point)
 					location.append(i.destination_point)
 					doc1=frappe.get_value("Pricing Matrix",{"source":i.origin_point,"dest":i.destination_point,"vehicle_type":i.vehicle_type},["price"])
-					price.append(flt(doc1))
+					price.append(flt(doc1)*flt(self.multiplier_factor))
 					if self.need_pickup:
 						local_rate1=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["local_rate"])
 						local_rate.append(local_rate1)
@@ -68,16 +68,18 @@ class BookingDetails(Document):
 							"agent_name":j.agent_name,
 							"amount":j.amount
 						})
-					doc.append("items",{
-						"item_code":transport.cc,
-						"qty":1,
-						"rate":sum(cc)
-					})
+						doc.append("items",{
+							"item_code":j.item,
+							"qty":1,
+							"description":"Agent Name : {0}".format(j.agent_name),
+							"rate":j.amount
+						})
 					
 				if self.special_packaging:
 					doc.append("items",{
 						"item_code":transport.sp,
 						"qty":1,
+						"description":self.special_packaging_description,
 						"rate":self.packaging_charges1
 					})
 
@@ -106,18 +108,20 @@ class BookingDetails(Document):
 					doc.append("items",{
 						"item_code":transport.pc,
 						"qty":1,
+						"description":i.desription,
 						"rate":sum(pp)
 					})
 				for lo in location:
 					doc.append("milestone_list",{
 						"milestone":lo
 					})
-				for add_c in self.mmcs_transport:
-					for csr in self.custom_region:
+				for i in self.mmcs_transport:
+					if i.additional_charge:
 						doc.append("items",{
-							"item_code":csr.item_name,
+							"item_code":transport.mmcs,
 							"qty":1,
-							"rate":add_c.additional_charge
+							"description":"Additional Trailer {0}".format(i.additional_trailer),
+							"rate":i.additional_charge
 						})
 
 				doc.save(ignore_permissions=True)
@@ -174,7 +178,14 @@ class BookingDetails(Document):
 					"qty":high,
 					"rate":(sum(price))/(sum(capacity))
 				})
-				
+				for i in self.mmcs_transport:
+					if i.additional_charge:
+						doc.append("items",{
+							"item_code":transport.mmcs,
+							"qty":1,
+							"description":"Additional Trailer {0}".format(i.additional_trailer),
+							"rate":i.additional_charge
+						})
 				if self.need_pickup:
 					doc.append("items",{
 						"item_code":transport.lt,
@@ -209,8 +220,9 @@ class BookingDetails(Document):
 							"amount":j.amount
 						})
 						doc.append("items",{
-							"item_code":j.item_name,
+							"item_code":j.item,
 							"qty":1,
+							"description":"Agent Name : {0}".format(j.agent_name),
 							"rate":j.amount
 						})
 				# for kl in self.booking_details:
@@ -222,6 +234,7 @@ class BookingDetails(Document):
 					doc.append("items",{
 						"item_code":transport.sp,
 						"qty":1,
+						"description":self.special_packaging_description,
 						"rate":self.packaging_charges1
 					})
 
@@ -239,6 +252,7 @@ class BookingDetails(Document):
 
 						"item_code":transport.pc,
 						"qty":1,
+						"description":i.desription,
 						"rate":sum(pp)
 					})
 				for lo in location:
@@ -314,7 +328,58 @@ class BookingDetails(Document):
 				v=frappe.safe_eval(c.formula, self.whitelisted_globals,abbr_amount)
 				c.amount=flt(v)
 				abbr_amount.update({str(c.abbr):c.amount})
-				
+		actual_weight=[]
+		for j in self.booking_items:
+			actual_weight.append(j.aw)
+		if len(actual_weight)>0:
+			self.total_actual_weight=sum(actual_weight)
+		to_capacity=[]
+		cp=0
+		cp1=0
+		for i in self.mmcs_transport:
+			cp=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["capacity"])
+			if i.additional_trailer:
+				cp1=frappe.get_value("Vehicle Type",{"name":i.additional_trailer},["capacity"])
+			cp=cp+cp1
+			i.cp_weight=cp
+			to_capacity.append(cp)
+		if len(to_capacity)>0:
+			self.total_capacity=sum(to_capacity)
+		if sum(actual_weight) >sum(to_capacity):
+			frappe.throw("Total Capacity of Vehicle Reached, Add another vehicle or additional Trailer")
+	
+		l=[]
+		w=[]
+		h=[]
+		for j in self.booking_items:
+			l.append(j.length)
+			w.append(j.width)
+			h.append(j.height)
+		self.total_length=sum(l)
+		self.total_width=sum(w)
+		self.total_height=sum(h)
+		lh=[]
+		wh=[]
+		hh=[]
+		for i in self.mmcs_transport:
+			cp=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["length","width","height"])
+			
+			cp1=frappe.get_value("Vehicle Type",{"name":i.additional_trailer},["length","width","height"])
+			lh.append(cp[0])
+			wh.append(cp[1])
+			hh.append(cp[2])
+			if cp1:
+				lh.append(cp1[0])
+				wh.append(cp1[1])
+				hh.append(cp1[2])
+		if sum(lh)<sum(l):
+			frappe.throw("Total length of Vehicle Reached, Add another vehicle or additional Trailer")
+		if sum(wh)<sum(w):
+			frappe.throw("Total width of Vehicle Reached, Add another vehicle or additional Trailer")
+		if sum(hh)<sum(h):
+			frappe.throw("Total height of Vehicle Reached, Add another vehicle or additional Trailer")
+
+			
 
 	@frappe.whitelist()
 	def item_list(self):

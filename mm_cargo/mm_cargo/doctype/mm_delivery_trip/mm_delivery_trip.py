@@ -100,13 +100,24 @@ class MMDeliveryTrip(Document):
 						frappe.throw("Waybill is already delivered")
 
 		self.set("milestone_list",[])
+		t_w=[]
 		for i in self.delivery_stops:
 			mil = frappe.get_doc("Waybill",{"name":i.waybill})
+			we=[]
 			for j in mil.milestone_list:
 				self.append("milestone_list",{
 					"milestone":j.milestone,
 					"waybill":i.waybill
 				})
+			if mil.sales_order:
+				so=frappe.get_doc("Sales Order",mil.sales_order)
+				for j in so.booking_items:
+					we.append(j.aw)
+					t_w.append(j.aw)
+				i.total_weight=sum(we)
+			self.total_weight=sum(t_w)
+			if sum(t_w)>self.load_capacity:
+				frappe.throw("Total Capacity of Vehicle Reached, Remove the additional way bill or create another Delivery Trip")
 			# j.milestone=set(j.milestone)
 		
 			# for a in self.delivery_stops:

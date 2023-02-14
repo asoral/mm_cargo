@@ -8,7 +8,6 @@
  "field_order": [
   "mmcs",
   "mm",
-  "cc",
   "item_group",
   "column_break_5",
   "lt",
@@ -26,12 +25,6 @@
    "fieldname": "mm",
    "fieldtype": "Link",
    "label": "Default Multi Model Transport Item",
-   "options": "Item"
-  },
-  {
-   "fieldname": "cc",
-   "fieldtype": "Link",
-   "label": "Default Custom Clearing  Item",
    "options": "Item"
   },
   {
@@ -66,7 +59,7 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-01-19 15:21:35.023594",
+ "modified": "2023-02-14 11:22:32.190173",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Transport Setting",

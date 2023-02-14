@@ -19,38 +19,48 @@
   {
    "fieldname": "vehicle_type",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Vehicle Type",
+   "reqd": 1,
    "unique": 1
   },
   {
    "fieldname": "capacity",
    "fieldtype": "Float",
-   "label": "Capacity"
+   "in_list_view": 1,
+   "label": "Capacity",
+   "reqd": 1
   },
   {
    "fieldname": "local_rate",
    "fieldtype": "Float",
-   "label": "Local Transport Rate"
+   "in_list_view": 1,
+   "label": "Local Transport Rate",
+   "reqd": 1
   },
   {
    "fieldname": "length",
    "fieldtype": "Float",
-   "label": "Length"
+   "in_list_view": 1,
+   "label": "Length",
+   "reqd": 1
   },
   {
    "fieldname": "width",
    "fieldtype": "Float",
-   "label": "Width"
+   "label": "Width",
+   "reqd": 1
   },
   {
    "fieldname": "height",
    "fieldtype": "Float",
-   "label": "Height"
+   "label": "Height",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-01-17 16:55:47.910619",
+ "modified": "2023-02-14 10:44:24.065799",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Vehicle Type",

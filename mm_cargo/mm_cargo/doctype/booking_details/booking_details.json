@@ -15,17 +15,25 @@
   "column_break_2",
   "booking_date",
   "shipment_type",
+  "multiplier_factor",
   "incoterm",
   "section_break_2",
   "port_of_entry",
   "port_of_exit",
   "mmcs_transport",
+  "total_capacity",
   "multimodal_transport",
   "multimodal_details",
   "custom_clearing_required",
   "custom_region",
   "weight_calculation_section",
   "booking_items",
+  "section_break_21",
+  "total_actual_weight",
+  "total_length",
+  "column_break_24",
+  "total_width",
+  "total_height",
   "section_break_15",
   "need_pickup",
   "pickup_address",
@@ -298,6 +306,50 @@
    "fieldtype": "Link",
    "label": "Importing Country Currency",
    "options": "Currency"
+  },
+  {
+   "depends_on": "doc.shipment_type==\"Consolidated\"",
+   "fieldname": "multiplier_factor",
+   "fieldtype": "Float",
+   "label": "Multiplier Factor"
+  },
+  {
+   "fieldname": "total_actual_weight",
+   "fieldtype": "Float",
+   "label": "Total Actual Weight",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_capacity",
+   "fieldtype": "Float",
+   "label": "Total Capacity",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_21",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "total_length",
+   "fieldtype": "Float",
+   "label": "Total Length",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_24",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_width",
+   "fieldtype": "Float",
+   "label": "Total Width",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_height",
+   "fieldtype": "Float",
+   "label": "Total Height",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -306,9 +358,17 @@
   {
    "link_doctype": "Quotation",
    "link_fieldname": "booking_details"
+  },
+  {
+   "link_doctype": "Sales Order",
+   "link_fieldname": "booking_details"
+  },
+  {
+   "link_doctype": "Waybill",
+   "link_fieldname": "booking_details"
   }
  ],
- "modified": "2023-02-02 13:45:21.079679",
+ "modified": "2023-02-14 14:52:58.541842",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Booking Details",
