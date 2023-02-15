@@ -10,6 +10,7 @@
   "parameter",
   "in",
   "out",
+  "type",
   "comments"
  ],
  "fields": [
@@ -24,14 +25,14 @@
    "fieldname": "in",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "In",
+   "label": "Truck Arriving",
    "options": "Yes\nNo"
   },
   {
    "fieldname": "out",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Out",
+   "label": "Truck Departing",
    "options": "Yes\nNo"
   },
   {
@@ -39,12 +40,20 @@
    "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Comments"
+  },
+  {
+   "fetch_from": "parameter.type",
+   "fieldname": "type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "Inspection Type"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-02-01 15:33:25.632850",
+ "modified": "2023-02-15 10:48:12.113950",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Inspection Template Items",

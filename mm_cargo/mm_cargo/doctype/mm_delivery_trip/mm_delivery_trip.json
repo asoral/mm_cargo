@@ -12,10 +12,13 @@
   "company",
   "inspection_status",
   "column_break_2",
-  "email_notification_sent",
   "inspection_required",
   "template",
   "section_break_3",
+  "delivered_by",
+  "supplier",
+  "supplier_name",
+  "supplier_email",
   "driver",
   "driver_name",
   "driver_email",
@@ -60,24 +63,17 @@
    "fieldtype": "Column Break"
   },
   {
-   "allow_on_submit": 1,
-   "default": "0",
-   "fieldname": "email_notification_sent",
-   "fieldtype": "Check",
-   "label": "Initial Email Notification Sent",
-   "read_only": 1
-  },
-  {
    "fieldname": "section_break_3",
    "fieldtype": "Section Break",
    "label": "Delivery Details"
   },
   {
+   "depends_on": "eval:doc.delivered_by==\"In-house\"",
    "fieldname": "driver",
    "fieldtype": "Link",
    "label": "Driver",
-   "options": "Driver",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.delivered_by==\"In-house\"",
+   "options": "Driver"
   },
   {
    "fetch_from": "driver.full_name",
@@ -269,6 +265,34 @@
    "fieldtype": "Float",
    "label": "Total Weight",
    "read_only": 1
+  },
+  {
+   "fieldname": "delivered_by",
+   "fieldtype": "Select",
+   "label": "Delivered By",
+   "options": "\nIn-house\nThird Party",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.delivered_by==\"Third Party\"",
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier (Sub Contractor)",
+   "options": "Supplier"
+  },
+  {
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Supplier Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "supplier.email_id",
+   "fieldname": "supplier_email",
+   "fieldtype": "Data",
+   "label": "Supplier Email",
+   "read_only": 1
   }
  ],
  "is_submittable": 1,
@@ -279,7 +303,7 @@
    "link_fieldname": "reference_name"
   }
  ],
- "modified": "2023-02-14 14:00:17.999951",
+ "modified": "2023-02-15 11:01:38.332390",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "MM Delivery Trip",

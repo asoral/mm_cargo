@@ -18,8 +18,10 @@
   "multiplier_factor",
   "incoterm",
   "section_break_2",
-  "port_of_entry",
   "port_of_exit",
+  "through_port",
+  "column_break_13",
+  "port_of_entry",
   "mmcs_transport",
   "total_capacity",
   "multimodal_transport",
@@ -120,14 +122,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "depends_on": "eval:doc.imp_ex==\"Import\"",
-   "fieldname": "port_of_entry",
-   "fieldtype": "Link",
-   "label": "Port of Entry",
-   "options": "Location"
-  },
-  {
-   "depends_on": "eval:doc.imp_ex==\"Export\"",
    "fieldname": "port_of_exit",
    "fieldtype": "Link",
    "label": "Port of Exit",
@@ -218,7 +212,7 @@
    "default": "0",
    "fieldname": "permits_required",
    "fieldtype": "Check",
-   "label": "Permits Required"
+   "label": "Other Special Charges"
   },
   {
    "depends_on": "eval:doc.permits_required==1",
@@ -308,7 +302,7 @@
    "options": "Currency"
   },
   {
-   "depends_on": "doc.shipment_type==\"Consolidated\"",
+   "depends_on": "eval:doc.shipment_type==\"Consolidated\"",
    "fieldname": "multiplier_factor",
    "fieldtype": "Float",
    "label": "Multiplier Factor"
@@ -350,6 +344,22 @@
    "fieldtype": "Float",
    "label": "Total Height",
    "read_only": 1
+  },
+  {
+   "fieldname": "through_port",
+   "fieldtype": "Link",
+   "label": "Through Port",
+   "options": "Location"
+  },
+  {
+   "fieldname": "port_of_entry",
+   "fieldtype": "Link",
+   "label": "Port of Entry",
+   "options": "Location"
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -368,7 +378,7 @@
    "link_fieldname": "booking_details"
   }
  ],
- "modified": "2023-02-14 14:52:58.541842",
+ "modified": "2023-02-15 11:26:19.758877",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Booking Details",

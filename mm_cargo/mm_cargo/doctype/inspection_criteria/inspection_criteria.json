@@ -7,9 +7,7 @@
  "engine": "InnoDB",
  "field_order": [
   "parameter",
-  "in",
-  "out",
-  "comments"
+  "type"
  ],
  "fields": [
   {
@@ -20,30 +18,18 @@
    "options": "Inspection Parameter"
   },
   {
-   "fieldname": "in",
-   "fieldtype": "Select",
+   "fetch_from": "parameter.type",
+   "fieldname": "type",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "In",
-   "options": "\nYes\nNo"
-  },
-  {
-   "fieldname": "out",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Out",
-   "options": "\nYes\nNo"
-  },
-  {
-   "fieldname": "comments",
-   "fieldtype": "Small Text",
-   "in_list_view": 1,
-   "label": "Comments"
+   "label": "Type",
+   "options": "Inspection Type"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-02-01 15:32:40.623942",
+ "modified": "2023-02-15 10:52:25.790816",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Inspection Criteria",

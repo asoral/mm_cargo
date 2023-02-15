@@ -1,34 +1,29 @@
 {
  "actions": [],
- "autoname": "field:parameter",
- "creation": "2023-01-30 14:52:00.923035",
+ "allow_rename": 1,
+ "autoname": "field:type",
+ "creation": "2023-02-15 10:41:58.924317",
+ "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "parameter",
   "type"
  ],
  "fields": [
   {
-   "fieldname": "parameter",
-   "fieldtype": "Data",
-   "label": "Parameter",
-   "unique": 1
-  },
-  {
    "fieldname": "type",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Type",
-   "options": "Inspection Type"
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-02-15 10:43:39.178463",
+ "modified": "2023-02-15 10:41:58.924317",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
- "name": "Inspection Parameter",
+ "name": "Inspection Type",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
