@@ -116,7 +116,12 @@ frappe.ui.form.on('MM Delivery Trip', {
 		// 	// 	console.log("UUUUUUUUUUUUUUUUUUUUUUUUUu",k.milestone)
 		// 	// })
 		// })
-		
+		if(frm.doc.supplier){
+			frm.add_custom_button(__('Purchase Order'), function() {
+				frappe.new_doc('Purchase Order',{"supplier":frm.doc.supplier})
+
+			}, __("Create"));
+		}
 		if(!frm.doc.__islocal){
 			frappe.call({
 				method:"list_m",
