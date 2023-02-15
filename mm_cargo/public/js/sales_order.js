@@ -11,6 +11,22 @@ frappe.ui.form.on("Sales Order", {
                         "milestone":v.milestone,
                         "timestamp":v.timestamp
                     })
+                })
+                $.each(frm.doc.booking_items,function(i,v){
+                    cur_frm.add_child("booking_items",
+                    {
+                        "length":v.length,
+                        "width":v.width,
+                        "height":v.height,
+                        "weight":v.weight,
+                        "numbers":v.numbers,
+                        "vw":v.vw,
+                        "aw":v.aw,
+                        "cargo":v.cargo,
+                        "cargo_properties":v.cargo_properties,
+                        "state_of_cargo":v.state_of_cargo
+                    })
+                    cur_frm.refresh_field("booking_items")
                     cur_frm.refresh_field("milestone_list")
                     cur_frm.refresh_field("delivery_address_name")
                 })

@@ -35,7 +35,7 @@ class BookingDetails(Document):
 					location.append(i.origin_point)
 					location.append(i.destination_point)
 					doc1=frappe.get_value("Pricing Matrix",{"source":i.origin_point,"dest":i.destination_point,"vehicle_type":i.vehicle_type},["price"])
-					price.append(flt(doc1)*flt(self.multiplier_factor))
+					price.append(flt(doc1))
 					if self.need_pickup:
 						local_rate1=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["local_rate"])
 						local_rate.append(local_rate1)
@@ -150,8 +150,9 @@ class BookingDetails(Document):
 					})
 					location.append(i.origin_point)
 					location.append(i.destination_point)
-					doc1=frappe.get_value("Pricing Matrix",{"source":i.origin_point,"dest":i.destination_point,"vehicle_type":i.vehicle_type},["price"])
-					price.append(flt(doc1))
+					doc1=frappe.db.get_value("Pricing Matrix",{"source":i.origin_point,"dest":i.destination_point,"vehicle_type":i.vehicle_type},["price"])
+					print("$$$$$$$$$$$$$$$$$$",doc1)
+					price.append(flt(doc1)*flt(self.multiplier_factor))
 					# if self.need_pickup:
 					local_rate1=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["local_rate"])
 					local_rate.append(local_rate1)
