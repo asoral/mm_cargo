@@ -349,16 +349,16 @@ class BookingDetails(Document):
 		if sum(actual_weight) >sum(to_capacity):
 			frappe.throw("Total Capacity of Vehicle Reached, Add another vehicle or additional Trailer")
 	
-		# l=[]
-		# w=[]
-		# h=[]
-		# for j in self.booking_items:
-		# 	l.append(j.length)
-		# 	w.append(j.width)
-		# 	h.append(j.height)
-		# self.total_length=sum(l)
-		# self.total_width=sum(w)
-		# self.total_height=sum(h)
+		l=[]
+		w=[]
+		h=[]
+		for j in self.booking_items:
+			l.append(j.length)
+			w.append(j.width)
+			h.append(j.height)
+		self.total_length=sum(l)
+		self.total_width=sum(w)
+		self.total_height=sum(h)
 		# vw=self.total_length * self.total_width * self.total_height
 		# lh=[]
 		# wh=[]
