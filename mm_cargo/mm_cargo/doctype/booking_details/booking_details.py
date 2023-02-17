@@ -349,36 +349,35 @@ class BookingDetails(Document):
 		if sum(actual_weight) >sum(to_capacity):
 			frappe.throw("Total Capacity of Vehicle Reached, Add another vehicle or additional Trailer")
 	
-		l=[]
-		w=[]
-		h=[]
-		for j in self.booking_items:
-			l.append(j.length)
-			w.append(j.width)
-			h.append(j.height)
-		self.total_length=sum(l)
-		self.total_width=sum(w)
-		self.total_height=sum(h)
-		lh=[]
-		wh=[]
-		hh=[]
-		for i in self.mmcs_transport:
-			cp=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["length","width","height"])
+		# l=[]
+		# w=[]
+		# h=[]
+		# for j in self.booking_items:
+		# 	l.append(j.length)
+		# 	w.append(j.width)
+		# 	h.append(j.height)
+		# self.total_length=sum(l)
+		# self.total_width=sum(w)
+		# self.total_height=sum(h)
+		# vw=self.total_length * self.total_width * self.total_height
+		# lh=[]
+		# wh=[]
+		# hh=[]
+		# for i in self.mmcs_transport:
+		# 	cp=frappe.get_value("Vehicle Type",{"name":i.vehicle_type},["length","width","height"])
 			
-			cp1=frappe.get_value("Vehicle Type",{"name":i.additional_trailer},["length","width","height"])
-			lh.append(cp[0])
-			wh.append(cp[1])
-			hh.append(cp[2])
-			if cp1:
-				lh.append(cp1[0])
-				wh.append(cp1[1])
-				hh.append(cp1[2])
-		if sum(lh)<sum(l):
-			frappe.throw("Total length of Vehicle Reached, Add another vehicle or additional Trailer")
-		if sum(wh)<sum(w):
-			frappe.throw("Total width of Vehicle Reached, Add another vehicle or additional Trailer")
-		if sum(hh)<sum(h):
-			frappe.throw("Total height of Vehicle Reached, Add another vehicle or additional Trailer")
+		# 	cp1=frappe.get_value("Vehicle Type",{"name":i.additional_trailer},["length","width","height"])
+		# 	lh.append(cp[0])
+		# 	wh.append(cp[1])
+		# 	hh.append(cp[2])
+		# 	if cp1:
+		# 		lh.append(cp1[0])
+		# 		wh.append(cp1[1])
+		# 		hh.append(cp1[2])
+
+		# vw1=sum(lh)*sum(wh)*sum(hh)
+		# if vw1>vw:
+		# 	frappe.throw("Total Volumetric Weight of Vehicle Reached, Add another vehicle or additional Trailer")
 
 			
 
