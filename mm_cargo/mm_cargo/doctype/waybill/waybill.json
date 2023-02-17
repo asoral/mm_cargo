@@ -67,7 +67,9 @@
   "tracking_status",
   "tracking_status_info",
   "booking_details",
-  "amended_from"
+  "amended_from",
+  "section_break_61",
+  "more_details"
  ],
  "fields": [
   {
@@ -488,11 +490,20 @@
    "label": "Booking Details",
    "options": "Booking Details",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_61",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "more_details",
+   "fieldtype": "Text Editor",
+   "label": "More Details"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2023-02-15 10:24:23.587970",
+ "modified": "2023-02-17 11:42:00.554475",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "Waybill",
@@ -545,6 +556,7 @@
    "write": 1
   }
  ],
+ "search_fields": "pickup_customer,delivery_customer",
  "show_name_in_global_search": 1,
  "sort_field": "modified",
  "sort_order": "DESC",

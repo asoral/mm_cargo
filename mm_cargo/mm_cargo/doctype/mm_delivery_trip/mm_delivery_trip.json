@@ -32,6 +32,9 @@
   "departure_time",
   "status_milestones",
   "employee",
+  "port_of_entry",
+  "through_port",
+  "port_of_exit",
   "delivery_service_stops",
   "delivery_stops",
   "total_weight",
@@ -293,6 +296,24 @@
    "fieldtype": "Data",
    "label": "Supplier Email",
    "read_only": 1
+  },
+  {
+   "fieldname": "port_of_entry",
+   "fieldtype": "Link",
+   "label": "Port of Entry",
+   "options": "Location"
+  },
+  {
+   "fieldname": "port_of_exit",
+   "fieldtype": "Link",
+   "label": "Port of Exit",
+   "options": "Location"
+  },
+  {
+   "fieldname": "through_port",
+   "fieldtype": "Link",
+   "label": "Through port",
+   "options": "Location"
   }
  ],
  "is_submittable": 1,
@@ -303,7 +324,7 @@
    "link_fieldname": "reference_name"
   }
  ],
- "modified": "2023-02-15 11:01:38.332390",
+ "modified": "2023-02-17 11:07:28.549198",
  "modified_by": "Administrator",
  "module": "Mm Cargo",
  "name": "MM Delivery Trip",
