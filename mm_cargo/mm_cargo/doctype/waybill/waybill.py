@@ -149,7 +149,7 @@ class Waybill(Document):
 		return list_adr5,list_con5
 
 	def before_update_after_submit(self):
-		if (self.otp == self.verification_code):
+		if self.otp == self.verification_code and self.delivery_status=="Delivered":
 			frappe.db.set_value("Delivery Stops",{"waybill":self.name,"parenttype":"MM Delivery Trip"},{
 								"delivered":1
 						})
